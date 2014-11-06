@@ -1,0 +1,208 @@
+@charset "utf-8";
+/* CSS Document */
+#site-heading-parent a {
+color: #333;
+	text-decoration:none;
+}
+#site-heading, #site-heading-parent {
+font-size: 20px;
+}
+@media (min-width: 768px){
+#site-heading, #site-heading-parent {
+top: 62px;
+left: 240px;
+position: absolute;
+}
+#site-heading-parent {top:32px;}
+}
+@media (min-width: 992px) {
+#site-heading, #site-heading-parent {
+top: 50px;
+font-size: 30px;
+}
+#site-heading-parent {top:20px;font-weight:300;}
+
+}
+
+   .cell {
+	   display:block;
+	   height:50px;
+		margin-bottom:10px;
+
+}
+.secondaryPalettes span {
+padding: 3px;
+position: absolute;
+background-color: #FFF;
+bottom: 0;
+right: 0;
+}
+
+   .C-9D2235 {background-color:#9D2235;}
+   .C-424242 {background-color:#424242;}
+   .C-F2F2F4 {background-color:#F2F2F4;}
+   .C-FFFFFF {background-color:#FFFFFF;}
+
+   .C-DDDCC5 {background-color:#DDDCC5;}
+   .C-958976 {background-color:#958976;}
+   .C-611427 {background-color:#611427;}
+   .C-1D2326 {background-color:#1D2326;}
+   .C-6A6A60 {background-color:#6A6A60;}
+
+   .C-E89A41 {background-color:#E89A41;}
+   .C-CB6741 {background-color:#CB6741;}
+   .C-99273A {background-color:#99273A;}
+   .C-54354A {background-color:#54354A;}
+   .C-97A144 {background-color:#97A144;}
+
+   .C-334D5C {background-color:#334D5C;}
+   .C-45B29D {background-color:#45B29D;}
+   .C-EFC94C {background-color:#EFC94C;}
+   .C-E27A3F {background-color:#E27A3F;}
+   .C-DF5A49 {background-color:#DF5A49;}
+
+   .C-936942 {background-color:#936942;}
+   .C-E8D4AF {background-color:#E8D4AF;}
+   .C-B3B496 {background-color:#B3B496;}
+   .C-658D91 {background-color:#658D91;}
+   .C-5B5A4E {background-color:#5B5A4E;}
+
+   .C-BFA980 {background-color:#BFA980;}
+   .C-F3EAC9 {background-color:#F3EAC9;}
+   .C-B0BCA6 {background-color:#B0BCA6;}
+   .C-61888C {background-color:#61888C;}
+   .C-436A6F {background-color:#436A6F;}
+
+   .C-99BFA2 {background-color:#99BFA2;}
+   .C-B8E600 {background-color:#B8E600;}
+   .C-FFFFCB {background-color:#FFFFCB;}
+   .C-BFBF99 {background-color:#BFBF99;}
+   .C-333F40 {background-color:#333F40;}
+
+   .C-6D80A6 {background-color:#6D80A6;}
+   .C-B8B9BF {background-color:#B8B9BF;}
+   .C-D6D0A5 {background-color:#D6D0A5;}
+   .C-D9BE6C {background-color:#D9BE6C;}
+   .C-93A651 {background-color:#93A651;}
+
+   .C-427676 {background-color:#427676;}
+   .C-A1CD73 {background-color:#A1CD73;}
+   .C-ECDB60 {background-color:#ECDB60;}
+   .C-007BBC {background-color:#007BBC;}
+   .C-3B596A {background-color:#3B596A;}
+
+   .C-73491E {background-color:#73491E;}
+   .C-648031 {background-color:#648031;}
+   .C-5A6691 {background-color:#5A6691;}
+   .C-B49516 {background-color:#B49516;}
+   .C-A73C32 {background-color:#A73C32;}
+
+   .C-F9D987 {background-color:#F9D987;}
+   .C-D5EAE9 {background-color:#D5EAE9;}
+   .C-359191 {background-color:#359191;}
+   .C-8D5824 {background-color:#8D5824;}
+   .C-777AA5 {background-color:#777AA5;}
+
+   .C-FCDEDE {background-color:#FCDEDE;}
+   .C-D84156 {background-color:#D84156;}
+   .C-5CCAE8 {background-color:#5CCAE8;}
+   .C-ACABA0 {background-color:#ACABA0;}
+   .C-EC6B36 {background-color:#EC6B36;}
+
+   .C-FFEB96 {background-color:#FFEB96;}
+   .C-D2232A {background-color:#D2232A;}
+   .C-F79413 {background-color:#F79413;}
+   .C-B4A24C {background-color:#B4A24C;}
+   .C-CD889A {background-color:#CD889A;}
+
+   .C-6F452B {background-color:#6F452B;}
+   .C-E09868 {background-color:#E09868;}
+   .C-AF402A {background-color:#AF402A;}
+   .C-E2B022 {background-color:#E2B022;}
+   .C-00B1AE {background-color:#00B1AE;}
+
+   .C-D9E1D9 {background-color:#D9E1D9;}
+   .C-A2B2B1 {background-color:#A2B2B1;}
+   .C-EBD9C0 {background-color:#EBD9C0;}
+   .C-ACABA0 {background-color:#ACABA0;}
+   .C-ECEADB {background-color:#ECEADB;}
+
+   .C-6F452B {background-color:#6F452B;}
+   .C-987D6B {background-color:#987D6B;}
+   .C-C4B5AB {background-color:#C4B5AB;}
+   .C-DAD1CA {background-color:#DAD1CA;}
+   .C-F0ECEA {background-color:#F0ECEA;}
+
+   .C-ED174C {background-color:#ED174C;}
+   .C-CE1141 {background-color:#CE1141;}
+   .C-D1D3D4 {background-color:#D1D3D4;}
+   .C-949598 {background-color:#949598;}
+   .C-000000 {background-color:#000000;}
+
+   .C-B34231 {background-color:#B34231;}
+   .C-848DAE {background-color:#848DAE;}
+   .C-80974F {background-color:#80974F;}
+   .C-E4E7D5 {background-color:#E4E7D5;}
+
+   .C-AAD3D2 {background-color:#AAD3D2;}
+   .C-ECD4AB {background-color:#ECD4AB;}
+   .C-655664 {background-color:#655664;}
+   .C-AC7E83 {background-color:#AC7E83;}
+   .C-877570 {background-color:#877570;}
+
+   .C-E23F24 {background-color:#E23F24;}
+   .C-A68941 {background-color:#A68941;}
+   .C-007681 {background-color:#007681;}
+   .C-231E67 {background-color:#231E67;}
+   .C-169E7B {background-color:#169E7B;}
+
+   .C-E73E41 {background-color:#E73E41;}
+   .C-A73843 {background-color:#A73843;}
+   .C-AE809B {background-color:#AE809B;}
+   .C-F26641 {background-color:#F26641;}
+   .C-FBB040 {background-color:#FBB040;}
+
+   .C-915541 {background-color:#915541;}
+   .C-D8D8C9 {background-color:#D8D8C9;}
+   .C-F8A07C {background-color:#F8A07C;}
+   .C-F0DABF {background-color:#F0DABF;}
+   .C-F0CE7D {background-color:#F0CE7D;}
+
+   .C-A06A71 {background-color:#A06A71;}
+   .C-7FC67A {background-color:#7FC67A;}
+   .C-BFD730 {background-color:#BFD730;}
+   .C-EA8536 {background-color:#EA8536;}
+   .C-007234 {background-color:#007234;}
+.affix-top,
+.affix,
+.affix-bottom {
+  position:static;
+}
+
+/* Show and affix the side nav when space allows it */
+@media screen and (min-width: 768px) {
+  .affix {
+    position: fixed; /* Undo the static from mobile first approach */
+  top:0;
+  }
+  .affix-bottom {
+    position: absolute; /* Undo the static from mobile first approach */
+  bottom:40px;
+  }
+}
+
+			.pagelinks .active {
+position: relative;
+background-color: #ececec;
+border: 1px solid #d8d8d8;
+}
+.floater .nav > li > a {
+padding: 2px 5px;
+}
+p.head {font-size:24px;}
+a.btn-default.uaRed {background-color:#9D2235;color:#FFF;border-color:#F2F2F4;}
+a.btn-default.uaRed:hover {background-color:#F2F2F4;color:#9D2235;border-color:#9D2235;}
+section .launchPad {margin-top:20px;}
+section .launchPad a {text-decoration:none;}
+section .launchPad h3 {margin-top:-50px;}
+section .launchPad .bit {margin-bottom:50px;}k
