@@ -32,6 +32,7 @@ import MySQLdb
 #for item in results:
 #    print item[0];
 
+#constructor for the database connection
 class Data:
     "Database Access Class"
     def __init__(self, db_address, db_port, db_user, db_password, myDB):
@@ -53,81 +54,7 @@ class Data:
             cursor.execute(sql)
         return cursor
 
-    def getFriends(self, user):
-        # query the database
-        getCmd = "SELECT UID, BUDDYID FROM BUDDY_LIST where UID = '%s'" %user
-        self.cursor= self.query(getCmd)
-        getResult = self.cursor.fetchall()
-
-        friends = []
-
-        #if the length is 0, no friends
-        if len(getResult) == 0:
-            return None
-        else:
-            for item in getResult:
-                #print item[1];
-                i = 1
-                friends.append(item[i])
-                i = i + 2
-
-        return friends
-
-
-
-        #return [ ["jbob123", "Jim Bob"], ["fred123", "Freddy Fred"] ]
-
-    def addFriend(self, user, frienduser):
-        # add frienduser to user's friends list in database
-        addCmd = "INSERT INTO BUDDY_LIST (UID, BUDDYID) VALUES ('%s', '%s')" %(user, frienduser)
-
-        #cmd to find a user and their friend (error checking)
-        findCmd = "SELECT UID, BUDDYID FROM BUDDY_LIST where (UID = '%s' AND BUDDYID = '%s')" % (user, frienduser)
-
-        #cmd to make sure that the user passed in is a member
-        memberCmd = "SELECT USERNAME FROM Members_Table where USERNAME = '%s'" %user
-
-        #cmd to make sure that the friend passed in is also a member
-        buddyCmd = "SELECT USERNAME FROM Members_Table where USERNAME ='%s'" %frienduser
-
-        #find the user in the database
-        self.cursor = self.query(memberCmd)
-        memberResult = self.cursor.fetchall()
-
-        #find the buddy in the database
-        self.cursor = self.query(buddyCmd)
-        buddyResult = self.cursor.fetchall()
-
-
-        #make sure that the buddy exists and is registered
-        if len(buddyResult) == 0:
-            print "The user '%s' does not have an account." %frienduser
-            success = False
-            return success
-
-        #check to make sure the user exists and is registered
-        if len(memberResult) == 1:
-
-            #query the databse to find both user and frienduser
-            self.cursor = self.query(findCmd)
-            findResult = self.cursor.fetchall()
-
-
-            #if the array is longer than 0, the two users are already friends
-            if len(findResult) > 0:
-                success = False
-                return success
-            else:
-                #add the user and the friend of choice to the table
-                self.cursor = self.query(addCmd)
-                addResult = self.cursor.fetchall()
-                success = True
-                return success
-        else:
-            #the user doesnt exist, therefore cannot add to friendslist
-            success = False
-            return success
-
+    ##authentication for the user
     def authenticateUser(self, user, password):
         # Get user's password from the database and compare it to the argument
         userCmd = "SELECT  USERNAME FROM Members_Table where USERNAME = '%s'" %user
