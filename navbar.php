@@ -1,6 +1,6 @@
 <?php 
 //Check for sessions
-if(isset($_SESSION["username"]))
+/*if(isset($_SESSION["username"]))
 {
 $curtheme = ''; //current theme
 $opptheme = ''; //opposite theme
@@ -30,7 +30,7 @@ elseif(($_GET['act']) == "groups"){
   $upcomingactive = "";
   $groupsactive = "active";
 }
-
+*/
 
 $nav_pages = '
     <ul class="nav navbar-nav navbar-right">
@@ -48,16 +48,13 @@ $nav_pages = '
         </ul>
       </li>
     </ul>';
-}
-else
-{
-  $nav_pages = '';
-}
+
+
 
 $navbar = '
 	<div class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
-          <img src="http://i.imgur.com/pamXbHx.png" style="position:absolute; padding-top:5px; left:-5px;"/>
+          <img src="http://www.uark.edu/_resources/img/logo-on-red.png" style="position:absolute; padding-left:50px; left:-5px;"/>
         </div>
           ' . $nav_pages . '
     </div>';

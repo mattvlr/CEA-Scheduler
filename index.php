@@ -1,6 +1,7 @@
 <?php
 //require_once('login.php'); <- uncomment to force a login page redirect
 require_once('sidebar.php');
+require_once('navbar.php');
 
 
 ?>
