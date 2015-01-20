@@ -1,76 +1,83 @@
 <!DOCTYPE html>
 <?php
+require_once('mysql/_db.php');
+require_once('mysql/_mysql.php');
+session_start();
 
-$form = '';
-$status = '';
-$rem = '';
+$mysql = new mysql_driver;
+$mysql->connect();
 
-if(isset($_COOKIE['wait']))
-{
-	$status = "You have tried too many times to login. Please wait another " . floor(($_COOKIE["wait"]-time())/60)  . " minutes " . ($_COOKIE["wait"]-time())%60 . " seconds and try again.<br>";
-}
-if(!isset($_POST['attempts']))
-{
- $attempts = 0;
-}
-else
-{
-$attempts = 1 + $_POST['attempts'];
-}
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+	$username=$_POST['username'];
+	$password=$_POST['password'];
 
-if(isset($_POST['email']))
-{
- $email = 'value="'.$_POST['email'];
-}
-else
-{
- $email = 'placeholder="Email Address';
-}
-if(isset($_POST['remember']))
-{
-$rem = 'checked';
-}
-if(isset($_POST['email']) && isset($_POST['password']))
-{
-	$id = $mysql->login($_POST['email'],$_POST['password']);
-	if($id)
-	{ // user logged in
-		if(isset($_POST['rem']))
-		{
-			$time = 172800; // 2 days;
-			setcookie('id',$id,time()+$time);  //IM PRETTY SURE ANYONE COULD JUST MAKE A COOKIE WITH THAT ID AND USE IT TO LOGIN, but it works for now...
-		}
-		$status = "<font color='green'>Login success!</font>";
-		$_SESSION = $mysql->getSessionInfo($id);
-		$_SESSION['id']= $id;
-		header("Location: index.php?act=onlogin");
+	$query = "SELECT username,password FROM Users WHERE username='$username' and password='$password'";
+	$result = $mysql->query($query);
+	$count = mysqli_num_rows($result);
+
+	if($count == 1){
+		header("location: index.php");
 	}
-	else  // not logged in
-	{
-		$status = "<font color='red'>Login failed!</font>";
-		if(!$mysql->exists('user',"email='".$_POST['email']."'"))
-		{
-			$status = "<font color='red'>Email Dosnt exist!</font>";
-		}
-	}
+	else
+		echo("Username or pass is wrong");
 }
+ 
+$form = '<div id="main-container" role="main">
+      
+      <section class="landingPage">
+         
+         <div class="container">
+            
+            <div class="row">
+               
+              <div class="col-md-3">&nbsp;</div>
+               
+              <div class="col-md-7">
+                  
+                  <div id="contact-form" class="clearfix" style="display: block; margin-left: auto; margin-right: auto;">
+					
+                    <div style="margin: 2em 2ex"><p align="center">Welcome to the Center for Educational Access Cart service at the University of Arkansas.</br> Running since 2015ish.</p></div>
+            
+                    <form name="login" action="" method="post" class="form-stacked">
 
-$form = '	<form class="form-signin" role="form" action="' . $_SERVER['PHP_SELF'] . '?act=login" method = "post">
-			<h1>Welcome to Kalendar.</h1>
-			<h2 class="form-signin-heading">Sign in:</h2>
-			<br>' . $status . 
-			'<input type="email" name = "email" class="form-control" ' . $email . '" required autofocus>
-			<input type="password" name = "password" class="form-control" placeholder="Password" required>
-			<input type="hidden" name="login" value = "true">
-			<input type="hidden" name="attempts" value ="' . $attempts . '">
-		<label class="checkbox">
-		<input type="checkbox" name = "rem" value="rem"'. $rem .'> Remember me
-		</label>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-		<br>
-		<center>Dont have an account? <a href="?act=register">Register here.</a></center>
-		<center><a href="?act=forgot">Forgot Password?</a></center>
-		</form>';
+                      <div class="form-group" style="margin: 2ex">
+                        <label for="userid" style="float: left; width: 8em">Username:</label>
+                        <input name="username" type="text" autofocus="autofocus" />
+                      </div>
+
+                      <div class="form-group" style="margin: 2ex">
+                        <label for="pwd" style="float: left; width: 8em">Password:</label>
+                        <input name="password" type="password" />
+                      </div>
+
+                      <div class="form-group" style="margin: 3ex" id="gsmobile">
+                        <input name="gsmobile" type="checkbox" onClick="this.form.action = isMobile(this.form.action)"/>
+                        <label for="gsmobile">Use Full Site (non-Mobile version) <- Doesn&#39t do anything</label>
+                      </div>
+
+                      <div style="margin: 2ex">
+                        <button class="btn btn-default" type="submit" value="Login">Log in</button>
+                        <!--trace-->
+                      </div>
+
+                      <div style="margin: 2ex">
+                        <p class="small"><a href="http://isishelp.uark.edu/frequently-asked-questions.php">Need help logging in?</a></p>
+                      </div>
+
+                    </form>
+                     	
+                  </div>
+              </div>
+               
+              <div class="col-md-3">&nbsp;</div>
+               	
+            </div>
+            
+         </div>
+         
+      </section>
+      
+   </div>';
 
 ?>
 <html lang="en">
@@ -87,7 +94,7 @@ $form = '	<form class="form-signin" role="form" action="' . $_SERVER['PHP_SELF']
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-
+	<link href="/resources/css/signin.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
