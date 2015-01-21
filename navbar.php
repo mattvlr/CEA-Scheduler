@@ -54,7 +54,7 @@ $nav_pages = '
 $navbar = '
 	<div class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
-          <img src="http://www.uark.edu/_resources/img/logo-on-red.png" style="position:absolute; padding-left:50px; left:-5px;"/>
+          <img src="/resources/img/logo-on-red.png" style="position:absolute; padding-left:35px; left:-5px;"/>
         </div>
           ' . $nav_pages . '
     </div>';
