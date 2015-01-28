@@ -2,11 +2,15 @@
 //require_once('login.php'); <- uncomment to force a login page redirect
 require_once('sidebar.php');
 require_once('navbar.php');
-
+//require_once('login.php'); // this checks for cookies and lets us know what to output for each user
 
 ?>
 <html>
 <head>
+	<div margin-left="300px">
+		test
+	</div>
+
     <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 

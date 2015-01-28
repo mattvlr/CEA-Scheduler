@@ -1,5 +1,5 @@
 <?php
-	require_once('_db.php');
+	require_once('_db.php'); //if you want to connect to the db in another file use this line
 class mysql_driver extends db_info
 {
 
@@ -284,13 +284,13 @@ class mysql_driver extends db_info
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	//login(  email ,  password ) - Check given email/password vs db return the id if info is valid else return false.
+	//login(  username ,  password ) - Check given username/password vs db return the id if info is valid else return false.
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	public function login($email, $password)
+	public function login($username, $password) //this is broken for now
 	{
-		$what = array('id','passhash','salt','permission');
-		$where = 'email = "' . $email. '"';
-		$login = $this->select('user',$what,$where);
+		$what = array('*');
+		$where = 'USERNAME = "' . $username. '"';
+		$login = $this->select('Users',$what,$where);
 		if($login != false)
 		{
 			$testhash = crypt($password,$login['salt']);
