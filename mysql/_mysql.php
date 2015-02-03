@@ -291,6 +291,8 @@ class mysql_driver extends db_info
 		$what = array('*');
 		$where = 'USERNAME = "' . $username. '"';
 		$login = $this->select('Users',$what,$where);
+		
+		 print_r($login);
 		if($login != false)
 		{
 			$testhash = crypt($password,$login['salt']);

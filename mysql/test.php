@@ -21,13 +21,13 @@ echo '<br>'; // new line for readability
 
 if($found->num_rows > 0){ //if we got something back do this
 
-	while($row = $found->fetch_assoc()){ //prints each row and converts the mysqli datatype to an associative php array.
-		var_dump($row);
-		echo('<br>');
-	}
+	//while($row = $found->fetch_assoc()){ //prints each row and converts the mysqli datatype to an associative php array.
+	//	var_dump($row);
+	//	echo('<br>');
+	//}
 }
 
-
+$mysql->login("admin","aaaaaa");
 //session testing here \/
 session_start();
 	if( isset( $_SESSION['visit_count']) )
