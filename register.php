@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <?php
 
+require_once('mysql/_db.php');
+require_once('mysql/_mysql.php');
+$mysql = new mysql_driver;
+$mysql->connect();
 $status = '';
 if( isset($_POST["create"]) && isset($_POST['email']) && isset($_POST['password']))
 {  
-	$user_inuse = $mysql->exists('USERS',"USERNAME'".$_POST['username']."'");
+	$user_inuse = $mysql->exists('USERS',"USERNAME='".$_POST['username']."'");
 	$email_inuse = $mysql->exists('USERS',"EMAIL='".$_POST['email']."'");
 	if(!$user_inuse && !$email_inuse )
 	{
@@ -14,13 +18,13 @@ if( isset($_POST["create"]) && isset($_POST['email']) && isset($_POST['password'
 	$userinfo = array(	'USERNAME' => $_POST['username'],
 						'FIRST_NAME' => $_POST['first_name'],
 						'LAST_NAME' => $_POST['last_name'],
-						'email' => $_POST['email'],
-						'passhash' => $passhash,
-						'salt' => $salt,
-						'dob' => $_POST['dob'],
-						'activation' => $activation
+						'EMAIL' => $_POST['email'],
+						'PASSHASH' => $passhash,
+						'SALT' => $salt,
+						'DATE_OF_BIRTH' => $_POST['dob'],
+						'ACTIVATION' => $activation
 					);	
-	if($mysql->insert('user',$userinfo))
+	if($mysql->insert('USERS',$userinfo))
 	{
 	//USER ADDED SUCCESSFULLY
 		require_once('smtp/Send_Mail.php');
@@ -48,17 +52,21 @@ if( isset($_POST["create"]) && isset($_POST['email']) && isset($_POST['password'
 
 $body = '<div class="register">
 	<form class="form-signin" role="form" action="' . $_SERVER['PHP_SELF'] . '?act=register" method = "post">
-	<h1>Welcome to Kalendar.</h1>
+	<h1>Welcome to the CEA Cart Scheduler Project!</h1>
 	<h2 class="form-signin-heading">Register:</h2>
 	<h3>' . $status . '</font></h3>
 	<input type="email" name = "email" class="form-control" placeholder="Email Address" required autofocus>
+	<br>
 	<input type="text" name = "username" class="form-control" placeholder="User Name" required>
 	<input type="password" name = "password" id = "password" class="form-control" placeholder="Password" required>
-	<input type="password" name = "password1" id = "password1" class="form-control" placeholder="Password" onkeyup="checkPass(); return false;" required>
+	
 	<a id = "confirmMessage"></a>
+	<br>
 	<input type=text name = "first_name" class="form-control" placeholder="First Name" required>
 	<input type=text name = "last_name" class="form-control" placeholder="Last Name" required>
+	<br>
 	<center>Date of Birth :</center> <input type="date" name = "dob" class="form-control">
+	<br>
 	<input type="hidden" name="create" value = "true">
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 	</form>
