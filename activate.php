@@ -5,7 +5,7 @@ $mysql->connect();
 
 $msg = 'fail';
 
-$perm = $mysql->select('user','permission','activation="'.$_GET['code'].'"');			//Get Permission level from database
+$perm = $mysql->select('Users','PERMISSION','ACTIVATION="'.$_GET['code'].'"');			//Get Permission level from database
 
 if($perm > '0')																			//Higher than unactivated permission
 {
@@ -14,7 +14,7 @@ if($perm > '0')																			//Higher than unactivated permission
 }
 else if($perm == '0')																	//0 - user hasnt been activated then
 {
-	if($mysql->update('user',"permission='1'",'activation="'.$_GET['code'].'"'))		// Activate user
+	if($mysql->update('Users',"PERMISSION='1'",'ACTIVATION="'.$_GET['code'].'"'))		// Activate user
 	{ 
 		$msg = 'Your account is now activated<br>
 			Login <a href="index.php?act=login">here</a>!';

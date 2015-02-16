@@ -8,8 +8,8 @@ $mysql->connect();
 $status = '';
 if( isset($_POST["create"]) && isset($_POST['email']) && isset($_POST['password']))
 {  
-	$user_inuse = $mysql->exists('USERS',"USERNAME='".$_POST['username']."'");
-	$email_inuse = $mysql->exists('USERS',"EMAIL='".$_POST['email']."'");
+	$user_inuse = $mysql->exists('Users',"USERNAME='".$_POST['username']."'");
+	$email_inuse = $mysql->exists('Users',"EMAIL='".$_POST['email']."'");
 	if(!$user_inuse && !$email_inuse )
 	{
 	$salt = uniqid(mt_rand(0,61),true);
@@ -24,12 +24,12 @@ if( isset($_POST["create"]) && isset($_POST['email']) && isset($_POST['password'
 						'DATE_OF_BIRTH' => $_POST['dob'],
 						'ACTIVATION' => $activation
 					);	
-	if($mysql->insert('USERS',$userinfo))
+	if($mysql->insert('Users',$userinfo))
 	{
 	//USER ADDED SUCCESSFULLY
 		require_once('smtp/Send_Mail.php');
 		$activation_email = 'Hello ' . $_POST['first_name'] . ' ' . $_POST['last_name'] . ', <br/> <br/> We need to confirm that this is your real email. To do so Click the link below.<br/><br/>
-							<a href="'.$base_url.'/main/activate.php?code='.$activation.'">'.$base_url.'/main/activate.php?code='.$activation.'</a>';
+							<a href="'.$base_url.'/activate.php?code='.$activation.'">'.$base_url.'/activate.php?code='.$activation.'</a>';
 		$status = '	<font color="green" size="5">Registration Successful<br></font>
 					<font color="green" size="3">Check your email for an activation link!';
 		Send_Mail($_POST['email'],"Email Verification",$activation_email);
