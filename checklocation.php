@@ -50,10 +50,10 @@ $zipcode = mysql_real_escape_string($zipcode);
 //see what the next ID number should be
 $sqlid="SELECT * FROM Stops";
 $idresult= mysql_query($sqlid, $conn); 
-$id=mysql_num_rows($idresult);
+$id=mysql_num_rows($idresult)+1;
 
 //insert form information into database
-$sql="INSERT INTO Stops (Place, FullName, Address, City, State, ZipCode, Latitude, Longitude) VALUES ('$nickname', '$fullname', '$address', '$city', '$state', $zipcode, '$lat', '$long')";
+$sql="INSERT INTO Stops (ID, Place, FullName, Address, City, State, ZipCode, Latitude, Longitude) VALUES ($id, '$nickname', '$fullname', '$address', '$state', '$city', $zipcode, '$lat', '$long')";
 $result = mysql_query($sql, $conn);
 
 
