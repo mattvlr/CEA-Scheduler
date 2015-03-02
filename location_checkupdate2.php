@@ -10,13 +10,13 @@ $conn = mysql_connect(localhost, $username, $password)or die("cannot connect");
 mysql_select_db("Scheduler")or die("cannot select DB");
 
 // username and password sent from form
+$id = $_GET['ID']; 
 $nickname=$_POST['nickname'];
 $fullname=$_POST['fullname'];
 $address=$_POST['address'];
 $state=$_POST['state'];
 $city=$_POST['city'];
 $zipcode=$_POST['zipcode'];
-
 
 //get long and latitude from geocoding service
 $geocode_add = str_replace(' ', '+', $address).",";
@@ -33,6 +33,7 @@ $lat=$data->{'results'}[0]->{'geometry'}->{'lat'};
 $long=$data->{'results'}[0]->{'geometry'}->{'lng'}; 
 
 // To protect MySQL injection (more detail about MySQL injection)
+$id = stripslashes($id);
 $nickname = stripslashes($nickname);
 $fullname = stripslashes($fullname);
 $address = stripslashes($address);
@@ -40,6 +41,7 @@ $state = stripslashes($state);
 $city = stripslashes($city);
 $zipcode = stripslashes($zipcode);
 
+$id = mysql_real_escape_string($id); 
 $nickname = mysql_real_escape_string($nickname);
 $fullname = mysql_real_escape_string($fullname);
 $address = mysql_real_escape_string($address);
@@ -47,19 +49,14 @@ $state = mysql_real_escape_string($state);
 $city = mysql_real_escape_string($city);
 $zipcode = mysql_real_escape_string($zipcode);
 
-//see what the next ID number should be
-$sqlid="SELECT * FROM Stops";
-$idresult= mysql_query($sqlid, $conn); 
-$id=mysql_num_rows($idresult)+1;
 
 //insert form information into database
-$sql="INSERT INTO Stops (ID, Place, FullName, Address, City, State, ZipCode, Latitude, Longitude) VALUES ($id, '$nickname', '$fullname', '$address', '$city', '$state', $zipcode, '$lat', '$long')";
+$sql="UPDATE Stops SET Place = '$nickname', FullName = '$fullname', Address = '$address', City = '$city', State = '$state', ZipCode = '$zipcode' WHERE ID = '$id'";
 $result = mysql_query($sql, $conn);
-
 
 if($result){
 // Register new location and redirect to file 
-header("location:location_success.php");}
+header("location:location_updatesuccess.php");}
 else {
-header("location:location_fail.php");}
+header("location:location_updatefail.php");}
 ?>

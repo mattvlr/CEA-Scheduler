@@ -21,6 +21,6 @@ require_once('navbar.php');
 <body>
 New location was successfully added. 
 <br>
-<a href="newlocation.php">Add another?</a>
+<a href="location_new.php">Add another?</a>
 </body>
 </html>

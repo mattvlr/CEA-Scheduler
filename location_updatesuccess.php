@@ -10,7 +10,7 @@ require_once('navbar.php');
 
 <html>
 <head>
-<title>Failure</title>
+<title>Success!</title>
 <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,8 +19,8 @@ require_once('navbar.php');
 
 </head>
 <body>
-The new location could not be added. 
+Location was successfully updated. 
 <br>
-<a href="location_new.php">Try again?</a>
+<a href="location_change.php">Update another?</a>
 </body>
 </html>

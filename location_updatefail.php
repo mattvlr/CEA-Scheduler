@@ -19,8 +19,8 @@ require_once('navbar.php');
 
 </head>
 <body>
-The new location could not be added. 
+The location could not be updated. 
 <br>
-<a href="location_new.php">Try again?</a>
+<a href="location_change.php">Try again?</a>
 </body>
 </html>
