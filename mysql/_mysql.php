@@ -288,21 +288,26 @@ class mysql_driver extends db_info
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function login($username, $password) //this is broken for now
 	{
-		$what = array('*');
-		$where = 'USERNAME = "' . $username. '"';
+		//$what = array('*');
+		//$what = "*";
+		/*$where = 'USERNAME = "' . $username. '"';
 		$login = $this->select('Users',$what,$where);
 		
 		 print_r($login);
 		if($login != false)
 		{
-			$testhash = crypt($password,$login['salt']);
-			if($testhash == $login['passhash'])
+			$testhash = crypt($password,$login['SALT']);
+			if($testhash == $login['PASSHASH'])
 			{
 				return $login['id'];
 			}
 		}
 
-		return false;
+		return false;*/
+		//$this->connect();
+		$query = "SELECT * FROM Users WHERE USERNAME = '" + $username + "'";
+		$result = mysql_query($query);
+		print_r($result);
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -17,35 +17,39 @@ $remember = ''; //if user/pass should be remembered
 $mysql = new mysql_driver;
 $mysql->connect();
 
-
+if(isset($_POST['username'])){ //fills in username if they got it wrong the first time.
+ $username = 'value="'.$_POST['username'];
+}
+else{
+ $username = 'placeholder="Username';
+}
 if(isset($_POST['remember'])){
   $remember = 'checked';
 }
 
-if($_SERVER["REQUEST_METHOD"] == "POST") { //this needs to change once we protect the passwords
-	$username=$_POST['username'];
-	$password=$_POST['password'];
-
-	$query = "SELECT username,password FROM Users WHERE username='$username' and password='$password'";
-	$result = $mysql->query($query);
-	$count = mysqli_num_rows($result);
-
-	if($count == 1){
-
-    if(isset($_POST['rem'])){
-      setcookie('id',"stillneedid",time()+172800);
+if(isset($_POST['username']) && isset($_POST['password']))
+{
+  $id = $mysql->login($_POST['username'],$_POST['password']);
+  if($id)
+  { // user logged in
+    if(isset($_POST['rem']))
+    {
+      $time = 172800; // 2 days;
+      setcookie('id',$id,time()+$time);  //IM PRETTY SURE ANYONE COULD JUST MAKE A COOKIE WITH THAT ID AND USE IT TO LOGIN, but it works for now...
     }
-    $loginStatus = "<font color='green'>Login success!</font>";
-    //$_SESSION = $mysql->getSessionInfo($id);
-    //$_SESSION['id']= $id;
-
-		header("location: index.php");
-	}
-	else{
-    $loginStatus = "<font color='red'>Login failed! Username or password is wrong!</font>";
-
+    $status = "<font color='green'>Login success!</font>";
+    $_SESSION = $mysql->getSessionInfo($id);
+    $_SESSION['id']= $id;
+    header("Location: index.php");
   }
-		
+  else  // not logged in
+  {
+    $loginstatus = "<font color='red'>Login failed!</font>";
+    if(!$mysql->exists('Users',"EMAIL='".$_POST['username']."'"))
+    {
+      $loginstatus = "<font color='red'>Username doesn't exsit!</font>";
+    }
+  }
 }
 
 /*if(isset($_POST['username']) && isset($_POST['password'])){
