@@ -272,9 +272,9 @@ class mysql_driver extends db_info
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function getSessionInfo($id)  //take id from cookie and return array of session info
 	{
-		$fields = array('username','first_name','last_name','avatar','permission');
-		$where = "id='" . $id . "'";
-		$info = $this->select('user',$fields,$where);
+		$fields = array('USERNAME','FIRST_NAME','LAST_NAME','PERMISSION');
+		$where = "ID='" . $id . "'";
+		$info = $this->select('USER',$fields,$where);
 		if(!$info)
 		{
 			return false;
@@ -288,12 +288,12 @@ class mysql_driver extends db_info
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public function login($username, $password) //this is broken for now
 	{
-		//$what = array('*');
+		$what = array('ID','PASSHASH','SALT','PERMISSION');
 		//$what = "*";
-		/*$where = 'USERNAME = "' . $username. '"';
+		$where = 'USERNAME = "' . $username. '"';
 		$login = $this->select('Users',$what,$where);
 		
-		 print_r($login);
+		// print_r($login);
 		if($login != false)
 		{
 			$testhash = crypt($password,$login['SALT']);
@@ -303,11 +303,8 @@ class mysql_driver extends db_info
 			}
 		}
 
-		return false;*/
-		//$this->connect();
-		$query = "SELECT * FROM Users WHERE USERNAME = '" + $username + "'";
-		$result = mysql_query($query);
-		print_r($result);
+		return false;
+
 	}
 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

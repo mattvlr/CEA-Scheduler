@@ -29,6 +29,9 @@
 					if($_GET['act']== 'forgot'){
 						$body = require("forgot.php");
 					}
+					if($_GET['act']== 'home'){
+						$body = require("index.php");
+					}
 	
 				}
 			?>

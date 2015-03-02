@@ -29,6 +29,7 @@ if(isset($_POST['remember'])){
 
 if(isset($_POST['username']) && isset($_POST['password']))
 {
+  //$result = mysql_
   $id = $mysql->login($_POST['username'],$_POST['password']);
   if($id)
   { // user logged in
@@ -40,14 +41,15 @@ if(isset($_POST['username']) && isset($_POST['password']))
     $status = "<font color='green'>Login success!</font>";
     $_SESSION = $mysql->getSessionInfo($id);
     $_SESSION['id']= $id;
-    header("Location: index.php");
+    var_dump($_SESSION);
+    header("Location: index.php?act=home");
   }
   else  // not logged in
   {
-    $loginstatus = "<font color='red'>Login failed!</font>";
+    $loginStatus = "<font color='red'>Login failed!</font>";
     if(!$mysql->exists('Users',"EMAIL='".$_POST['username']."'"))
     {
-      $loginstatus = "<font color='red'>Username doesn't exsit!</font>";
+      $loginStatus = "<font color='red'>Username doesn't exsit!</font>";
     }
   }
 }
