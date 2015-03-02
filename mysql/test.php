@@ -3,7 +3,7 @@ require_once('_db.php');
 require_once('_mysql.php');
 
 echo "TESTING THE MYSQL DRIVER<BR>";
-
+echo $_SERVER['SERVER_NAME'];
 $mysql = new mysql_driver;
 
 if($mysql->connect()) //we we're connected output the echo statements

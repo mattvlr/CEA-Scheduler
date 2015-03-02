@@ -28,7 +28,7 @@ if( isset($_POST["create"]) && isset($_POST['email']) && isset($_POST['password'
 	{
 	//USER ADDED SUCCESSFULLY
 		require_once('smtp/Send_Mail.php');
-		$activation_email = 'Hello ' . $_POST['first_name'] . ' ' . $_POST['last_name'] . ', <br/> <br/> We need to confirm that this is your real email. To do so Click the link below.<br/><br/>
+		$activation_email = 'Hello ' . $_POST['first_name'] . ' ' . $_POST['last_name'] . ', <br/> <br/> We need to confirm that this is your real email. To do so click the link below.<br/><br/>
 							<a href="'.$base_url.'/activate.php?code='.$activation.'">'.$base_url.'/activate.php?code='.$activation.'</a>';
 		$status = '	<font color="green" size="5">Registration Successful<br></font>
 					<font color="green" size="3">Check your email for an activation link!';

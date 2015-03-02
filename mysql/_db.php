@@ -1,6 +1,6 @@
 <?php
 //call this file in order to connect to the database, there is an example of this in test.php
-$base_url = 'http://localhost:3306';
+$base_url = 'http://localhost';
 abstract class db_info
 {	
 	////////////////////////////////////////////
