@@ -274,7 +274,7 @@ class mysql_driver extends db_info
 	{
 		$fields = array('USERNAME','FIRST_NAME','LAST_NAME','PERMISSION');
 		$where = "ID='" . $id . "'";
-		$info = $this->select('USER',$fields,$where);
+		$info = $this->select('Users',$fields,$where);
 		if(!$info)
 		{
 			return false;
@@ -299,7 +299,7 @@ class mysql_driver extends db_info
 			$testhash = crypt($password,$login['SALT']);
 			if($testhash == $login['PASSHASH'])
 			{
-				return $login['id'];
+				return $login['ID'];
 			}
 		}
 

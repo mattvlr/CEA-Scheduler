@@ -42,7 +42,7 @@ if(isset($_POST['username']) && isset($_POST['password']))
     $_SESSION = $mysql->getSessionInfo($id);
     $_SESSION['id']= $id;
     var_dump($_SESSION);
-    header("Location: index.php?act=home");
+    header("Location: index.php?act=m");
   }
   else  // not logged in
   {

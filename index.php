@@ -1,7 +1,7 @@
 <?php
-	require_once('sidebar.php');
-	require_once('navbar.php');
-	//require_once('login.php'); // this checks for cookies and lets us know what to output for each user
+	//require_once('sidebar.php');
+	//require_once('navbar.php');
+	require_once('login.php'); // this checks for cookies and lets us know what to output for each user
 
 ?>
 <html>
@@ -29,8 +29,8 @@
 					if($_GET['act']== 'forgot'){
 						$body = require("forgot.php");
 					}
-					if($_GET['act']== 'home'){
-						$body = require("index.php");
+					if($_GET['act']== 'm'){
+						$body = require("main.php");
 					}
 	
 				}
