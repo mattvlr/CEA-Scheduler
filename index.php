@@ -51,6 +51,9 @@
 					if($_GET['loc'] == 'edit'){
 						$body = require("location_change.php");
 					}
+					if($_GET['loc'] == 'delete'){
+						$body = require("location_delete.php");
+					}
 					if($_GET['loc'] == 'uS'){
 						$body = require("location_updatesuccess.php");
 					}
