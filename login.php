@@ -16,7 +16,7 @@ if(isset($_SESSION["ID"]) && isset($_SESSION["USERNAME"]) && isset($_SESSION["FI
 	$first_name = $_SESSION['FIRST_NAME'];
 	$last_name = $_SESSION['LAST_NAME'];
 	$permission = $_SESSION['PERMISSION'];
-	var_dump($_SESSION);
+	//var_dump($_SESSION);
 	//header("Location: ?act=m");
 
 }

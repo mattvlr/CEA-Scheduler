@@ -1,13 +1,12 @@
 <?php
-	//require_once('sidebar.php');
-	 
-	require_once('navbar.php');
 	require_once('login.php'); // this checks for cookies and lets us know what to output for each user
+	require_once('navbar.php');
+	require_once('sidebar.php');
 
 ?>
 <html>
 	<head>
-		<script src="/resources/js/jquery-2.1.3.min.js" type="text/javascript"></script>
+		<!--<script src="/resources/js/jquery.min.js" type="text/javascript"></script> -->
 
     	<!-- Bootstrap core CSS -->
     	<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -17,9 +16,9 @@
 	</head>
 
 	<body>
-		
-			<?php
+		<div class="main_body">
 
+			<?php
 				if(isset($_GET['act'])) {
 				
 					if($_GET['act']== 'register'){
@@ -34,9 +33,33 @@
 					if($_GET['act']== 'm'){
 						$body = require("main.php");
 					}
+					if($_GET['act']== 'admin'){
+						$body = require("admin.php");
+					}
 	
 				}
+				if(isset($_GET['loc'])){
+					if($_GET['loc'] == 'new'){
+						$body = require("location_new.php");
+					}
+					if($_GET['loc'] == 'fail'){
+						$body = require("location_fail.php");
+					}
+					if($_GET['loc'] == 'update'){
+						$body = require("location_checkupdate.php");
+					}
+					if($_GET['loc'] == 'edit'){
+						$body = require("location_change.php");
+					}
+					if($_GET['loc'] == 'uS'){
+						$body = require("location_updatesuccess.php");
+					}
+					if($_GET['loc'] == 'uF'){
+						$body = require("location_updatefail.php");
+					}
+				}
 			?>
+		</div>
 	</body>
 
 </html>

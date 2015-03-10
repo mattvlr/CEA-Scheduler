@@ -1,12 +1,4 @@
-<?php
-//require_once('login.php'); <- uncomment to force a login page redirect
-require_once('sidebar.php');
-require_once('navbar.php');
-//require_once('login.php'); 
-// this checks for cookies and lets us 
-// know what to output for each user
 
- ?>
 <html>
 <head>
 <title>Update Location</title>
@@ -14,20 +6,21 @@ require_once('navbar.php');
 <body>
 <table width="600" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
 <tr>
-<form name="form1" method="post" action="location_checkupdate.php">
+<form name="form1" method="post" action="?loc=update">
 <td>
 <table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
 <tr>
 <td colspan="3"><strong>Edit Location</strong></td>
 </tr>
 <?php
-$username="root"; // Mysql username
+$host = "104.131.179.153";
+$username="web"; // Mysql username
 $password="cea"; // Mysql password
 $db_name="Scheduler"; // Database name
 $tbl_name="Stops"; // Table name
 
 // Connect to server and select database.
-$conn = mysql_connect(localhost, $username, $password)or die("cannot connect");
+$conn = mysql_connect($host, $username, $password)or die("cannot connect");
 mysql_select_db("Scheduler")or die("cannot select DB");
 
 $sql = "SELECT FullName FROM Stops GROUP BY FullName";

@@ -1,12 +1,12 @@
 <?php
-
-$username="root"; // Mysql username
+$host="104.131.179.153";
+$username="web"; // Mysql username
 $password="cea"; // Mysql password
 $db_name="Scheduler"; // Database name
 $tbl_name="Stops"; // Table name
 
 // Connect to server and select databse.
-$conn = mysql_connect(localhost, $username, $password)or die("cannot connect");
+$conn = mysql_connect($host, $username, $password)or die("cannot connect");
 mysql_select_db("Scheduler")or die("cannot select DB");
 
 // username and password sent from form
@@ -56,7 +56,7 @@ $result = mysql_query($sql, $conn);
 
 if($result){
 // Register new location and redirect to file 
-header("location:location_updatesuccess.php");}
+header("Location: index.php?loc=uS");}
 else {
-header("location:location_updatefail.php");}
+header("Location: index.php?loc=uF");}
 ?>
