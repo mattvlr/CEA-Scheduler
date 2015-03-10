@@ -1,11 +1,13 @@
 <?php
 	//require_once('sidebar.php');
-	//require_once('navbar.php');
+	 
+	require_once('navbar.php');
 	require_once('login.php'); // this checks for cookies and lets us know what to output for each user
 
 ?>
 <html>
 	<head>
+		<script src="/resources/js/jquery-2.1.3.min.js" type="text/javascript"></script>
 
     	<!-- Bootstrap core CSS -->
     	<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
@@ -36,4 +38,5 @@
 				}
 			?>
 	</body>
+
 </html>
