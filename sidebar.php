@@ -9,6 +9,7 @@
           	 	 <ul class="nav nav-sidebar">
           	 	 	 <li><a href="?act=m">Site Home</a></li>
 				 	 <li><a href="?act=admin">Admin Home</a></li>
+				 	 <li><a href="?act=logout">LOGOUT</a></li>
 				 </ul>
 		  	 </div>
 		 </div>
