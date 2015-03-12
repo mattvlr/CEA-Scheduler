@@ -7,14 +7,8 @@ if(isset($_SESSION['USERNAME']))
 }
 
 
-
-
-
-
 $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
         <li class="dropdown">
           <a href="index.php?act=admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">'. $_SESSION['USERNAME'] .'<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
@@ -33,7 +27,7 @@ $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example
 
 
 $navbar = '
-	<div class="navbar navbar-default navbar-fixed-top">
+  <div class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
          <a href="http://www.uark.edu"> <img src="/resources/img/logo-on-red.png" style="position:absolute; padding-left:35px; left:-5px;"/>
         </a></div>

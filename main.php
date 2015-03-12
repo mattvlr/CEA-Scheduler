@@ -13,4 +13,4 @@ $text ='<br><br><br><p>Your name is <bold><font size="5">'. $_SESSION['FIRST_NAM
 		. Your username is <bold><font size="5">'. $_SESSION['USERNAME'] . '</font></bold> and your permission on this site is <bold><font size="5">'. $permission . '</font></bold></p> ';
 echo $text;
  ?>
-</div>
+
