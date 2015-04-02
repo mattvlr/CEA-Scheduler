@@ -46,11 +46,11 @@ if(isset($_POST['username']) && isset($_POST['password']))
   }
   else  // not logged in
   {
-    $loginStatus = "<font color='red'>Login failed!</font>";
-    if(!$mysql->exists('Users',"EMAIL='".$_POST['username']."'"))
-    {
-      $loginStatus = "<font color='red'>Username doesn't exsit!</font>";
-    }
+    $loginStatus = "<font color='#aa0000'>Login failed!</font>";
+    //if(!$mysql->exists('Users',"EMAIL='".$_POST['username']."'"))
+    //{
+    //  $loginStatus = "<font color='#aa0000'>Username doesn't exsit!</font>";
+    //}
   }
 }
 
@@ -86,7 +86,8 @@ $form = '<div id="main-container" role="main">
                         <input name="password" type="password" class="form-control" placeholder="Password" />
                         <input name="rem" type="checkbox" value="rem"'.$remember.'/>
                         
-                        <label>Remember login?</label>
+                        <label>Remember login?</label><br>
+                        <label>'.$loginStatus.'</label>
                         <br>
                         <br>
                         <button class="btn btn-primary btn-lg" type="submit" value="Login">Log in</button>
