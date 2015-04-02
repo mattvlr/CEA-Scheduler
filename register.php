@@ -70,7 +70,7 @@ $body = '<div class="register">
 	<input type="hidden" name="create" value = "true">
 	<button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
 	</form>
-	<center> Already have an account? Login <a href="?act=login">here</a>.</center>
+	<center> Already have an account? Login <a href="/loginform.php">here</a>.</center>
 
 	</div> <!-- /register -->';
 

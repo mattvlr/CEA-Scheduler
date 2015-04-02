@@ -72,34 +72,30 @@ $form = '<div id="main-container" role="main">
               <div class="col-md-7">
                   
                   <div id="contact-form" class="clearfix" style="display: block; margin-left: auto; margin-right: auto;">
-					
-                    <div style="margin: 2em 2ex"><p align="center">Welcome to the Center for Educational Access Cart service at the University of Arkansas.</br> Running since 2015ish.</p></div>
-                    <br>'. $loginStatus. '
-                    <form name="login" action="" method="post" class="form-stacked">
+					         <div class="jumbotron">
+                   <h1>Welcome!</h1>
+                  <p>To the Center for Educational Access Cart service at the University of Arkansas. Running since 2015ish.</p>
+  
+                  </div>
+                    <form name="login" action="" method="post" class="form-signin">
 
-                      <div class="form-group" style="margin: 2ex">
-                        <label for="userid" style="float: left; width: 8em">Username:</label>
-                        <input name="username" type="text" autofocus="autofocus" />
-                      </div>
-
-                      <div class="form-group" style="margin: 2ex">
-                        <label for="pwd" style="float: left; width: 8em">Password:</label>
-                        <input name="password" type="password" />
-                      </div>
-
-                      <div class="form-group" style="margin: 3ex" id="CB_rem">
+                      
+                        
+                        <input name="username" type="text" class="form-control" placeholder="Email Address" autofocus="autofocus" />
+                        <br>
+                        <input name="password" type="password" class="form-control" placeholder="Password" />
                         <input name="rem" type="checkbox" value="rem"'.$remember.'/>
+                        
                         <label>Remember login?</label>
-                      </div>
+                        <br>
+                        <br>
+                        <button class="btn btn-primary btn-lg" type="submit" value="Login">Log in</button>
+                        
 
-                      <div style="margin: 2ex">
-                        <button class="btn btn-default" type="submit" value="Login">Log in</button>
-                        <!--trace-->
-                      </div>
-
-                      <div style="margin: 2ex">
-                        <p class="small"><a href="http://isishelp.uark.edu/frequently-asked-questions.php">Need help logging in?</a></p>
-                      </div>
+                        <br>
+                        <br>
+                        <p class=""><a href="http://isishelp.uark.edu/frequently-asked-questions.php">Need help logging in?</a></p>
+                        <p class="">Don&#39;t have an account? Register <a href="/register.php">here.</a></p>
 
                     </form>
                      	
