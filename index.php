@@ -63,6 +63,9 @@
 					if($_GET['loc'] == 'uF'){
 						$body = require("location_updatefail.php");
 					}
+					if($_GET['loc'] == 'editor'){
+						$body = require("map_editor.php");
+					}
 				}
 			?>
 		</div>

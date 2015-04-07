@@ -2,4 +2,6 @@
 <br>
 <a href="?loc=edit">Change Location</a>
 <br> 
-<a href="?loc=delete">Delete Location (Not Yet Functional)</a>
+<a href="?loc=delete">Delete Location</a>
+<br>
+<a href="?loc=editor">Map Editor Test Page</a>

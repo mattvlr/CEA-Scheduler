@@ -29,6 +29,7 @@ if(isset($_POST['remember'])){
 
 if(isset($_POST['username']) && isset($_POST['password']))
 {
+
   //$result = mysql_
   $id = $mysql->login($_POST['username'],$_POST['password']);
   if($id)
@@ -38,7 +39,7 @@ if(isset($_POST['username']) && isset($_POST['password']))
       $time = 172800; // 2 days;
       setcookie('id',$id,time()+$time);  //IM PRETTY SURE ANYONE COULD JUST MAKE A COOKIE WITH THAT ID AND USE IT TO LOGIN, but it works for now...
     }
-    $status = "<font color='green'>Login success!</font>";
+    $loginStatus = "<font color='green'>Login success!</font>";
     $_SESSION = $mysql->getSessionInfo($id);
     $_SESSION['id']= $id;
     var_dump($_SESSION);
@@ -81,7 +82,7 @@ $form = '<div id="main-container" role="main">
 
                       
                         
-                        <input name="username" type="text" class="form-control" placeholder="Email Address" autofocus="autofocus" />
+                        <input name="username" type="text" class="form-control" placeholder="Username" autofocus="autofocus" />
                         <br>
                         <input name="password" type="password" class="form-control" placeholder="Password" />
                         <input name="rem" type="checkbox" value="rem"'.$remember.'/>
@@ -99,7 +100,7 @@ $form = '<div id="main-container" role="main">
                         <p class="">Don&#39;t have an account? Register <a href="/register.php">here.</a></p>
 
                     </form>
-                     	
+                    
                   </div>
               </div>
                
