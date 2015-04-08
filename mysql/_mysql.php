@@ -142,6 +142,59 @@ class mysql_driver extends db_info
 
 
 	}
+		public function selectMany( $table, $get, $where='') //SELECTs the fields designated in the array $get WHERE conditions..
+	{
+		$data = array();
+		if(is_array($get))
+		{
+			$getq = $this->arrayToQuery($get);
+		}
+		else
+		{
+			$getq = $get;
+		}
+		$query = "SELECT " . $getq . " FROM " . $table;
+
+		if( $where != '')
+		{
+			$query .= " WHERE " . $where;
+		}
+		$query_id = $this->query($query,$get);
+
+		if(is_array($get))
+		{
+			$i = 0;
+			while($row = mysqli_fetch_array($query_id))
+			{
+				$j = 0;
+				while( $j < count($get))
+				{
+					$data[$i][$get[$j]] = $row[$get[$j]];
+					$j++;
+				}
+			$i++;
+			}
+		}
+		else  // handle single data returns
+		{
+			$i = 0;
+			while($row = mysqli_fetch_array($query_id))
+			{
+				$data[$i] = $row[$get];
+				$i++;
+			}
+		}
+		if(! $this->query_id )
+		{
+			$this->error("MYSQL QUERY ERROR: QUERY = " . $query);
+			return false;
+		}	
+
+
+		return $data;
+
+
+	}
 	/*
 	public function compare( $table, $get='', $value, $where='' ) // used like compare('user', 'passhash', $test_passhash, 'id') 
 	{	//test a value against the db
@@ -306,7 +359,19 @@ class mysql_driver extends db_info
 		return false;
 
 	}
-
+		public function getStops()
+	{
+		$get =  array('Place','Latitude','Longitude');
+		$where = "";
+		
+		$info = $this->selectMany('Stops',$get,$where);
+		
+		if($info)
+		{
+			return $info;
+		}
+		return false;
+	}
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	//disconnect( ) - Disconnect from MySQL db 
 	////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
