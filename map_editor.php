@@ -5,21 +5,17 @@ $mysql = new mysql_driver;
 		$mysql->connect();
 		$stops = $mysql->getStops();
 		$num_stops = count($stops);
-		print_r($stops[0][0]);
-		//print_r($stops);  
+		
 		$places = array($num_stops);
 		$lats = array($num_stops);
 		$lngs = array($num_stops);
 		
-
+		
 		for ($i = 0; $i < $num_stops; ++$i) {
 			$places[$i] = $stops[$i]['Place'];
 			$lats[$i] = $stops[$i]['Latitude'];
 			$lngs[$i] = $stops[$i]['Longitude'];
     	}
-		
-      	 echo($places[0]);
-        //var_dump($places);
 
 
 ?>
@@ -41,18 +37,23 @@ $mysql = new mysql_driver;
 				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 			id: 'examples.map-i875mjb7'
 		}).addTo(map);
-		var test = 10;
+
+
+
+
 		var stopsCount = "<?php echo json_encode($num_stops); ?>";
-		var place = "<?php echo($places[".+test.toString()+."]); ?>";
-		alert(place);
-		//alert(stopsCount);
-		//var marker = L.marker([51.5, -0.09]).addTo(map);
-		for (i = 0; i < stopsCount; i++) {
-		// var place = "<php echo $places[" + i + "]; ?>";
-		// alert(place); 
-   		// text += cars[i] + "<br>";
-			}
-		
+
+
+		var lngs = <?php echo json_encode($lngs); ?>;
+		var lats = <?php echo json_encode($lats); ?>;
+		var places = <?php echo json_encode($places); ?>;
+
+  		for(var i=0;i<stopsCount;i++){
+  			if(lats[i] != null){
+        		var marker = L.marker([lats[i],lngs[i]]).addTo(map);
+  				marker.bindPopup("<b>" + places[i] + "</b>").openPopup();}
+    	}
+
 
 	</script>
 
