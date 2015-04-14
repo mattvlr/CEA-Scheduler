@@ -20,28 +20,44 @@ $mysql = new mysql_driver;
 
 ?>
 <html>
-	<head>
-		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-		<script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
-	</head>
+	  <head>
+   		 <style type="text/css">
+     	 html, body, #map-canvas { height: 100%; margin: 0; padding: 0;}
+   		 </style>
+
+   		 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8a1UKXLfNwfqwR_nmH-yg-l35APWpeL4"></script>
+    
+    	<script type="text/javascript">
+      		function initialize() {
+        		var mapOptions = {
+          			center: { lat: 36.068681, lng: -94.176012},
+          			zoom: 17
+        		};
+        		var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+	        	var stopsCount = "<?php echo json_encode($num_stops); ?>";
+				var lngs = <?php echo json_encode($lngs); ?>;
+				var lats = <?php echo json_encode($lats); ?>;
+				var places = <?php echo json_encode($places); ?>;
+				for(var i=0; i < stopsCount; i++){
+					if(lats[i] != null){
+						var myLatlng = new google.maps.LatLng(lats[i],lngs[i]);
+						var marker = new google.maps.Marker({
+							position: myLatlng,
+							map: map,
+							title: places[i]
+						});
+					}
+				}
+      		}
+
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    	</script>
+  	</head>
 	<body>
-		<div id="map" style="width: 800px; height: 600px"></div>
-		<script>
 
-		var map = L.map('map').setView([36.068681, -94.176012], 15);
-
-		L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-			maxZoom: 18,
-			attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-				'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-				'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-			id: 'examples.map-i875mjb7'
-		}).addTo(map);
-
-
-
-
-		var stopsCount = "<?php echo json_encode($num_stops); ?>";
+		<!--var stopsCount = "<?php echo json_encode($num_stops); ?>";
 
 
 		var lngs = <?php echo json_encode($lngs); ?>;
@@ -54,8 +70,8 @@ $mysql = new mysql_driver;
   				marker.bindPopup("<b>" + places[i] + "</b>").openPopup();}
     	}
 
+		-->
 
-	</script>
-
+		<div id="map-canvas"></div>
 	</body>
 </html>
