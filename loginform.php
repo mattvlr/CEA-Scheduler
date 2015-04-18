@@ -71,7 +71,7 @@ $form = '<div id="main-container" role="main">
               <div class="col-md-3">&nbsp;</div>
                
               <div class="col-md-7">
-                  
+                  <div class="well" style="background-color:#eee">
                   <div id="contact-form" class="clearfix" style="display: block; margin-left: auto; margin-right: auto;">
 					         <div class="jumbotron">
                    <h1>Welcome!</h1>
@@ -100,7 +100,7 @@ $form = '<div id="main-container" role="main">
                         <p class="">Don&#39;t have an account? Register <a href="/register.php">here.</a></p>
 
                     </form>
-                    
+                    </div>
                   </div>
               </div>
                

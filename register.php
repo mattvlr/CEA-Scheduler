@@ -50,7 +50,9 @@ if( isset($_POST["create"]) && isset($_POST['email']) && isset($_POST['password'
 
 }
 
-$body = '<div class="register">
+$body = '  <div class="container">
+            
+            <div class="row"> <div class="col-md-3">&nbsp;</div><div class="col-md-7"><div class="well" style="background-color:#eee"><div class="register">
 	<form class="form-signin" role="form" action="' . $_SERVER['PHP_SELF'] . '?act=register" method = "post">
 	<h1>Welcome to the CEA Cart Scheduler Project!</h1>
 	<h2 class="form-signin-heading">Register:</h2>
@@ -72,7 +74,7 @@ $body = '<div class="register">
 	</form>
 	<center> Already have an account? Login <a href="/loginform.php">here</a>.</center>
 
-	</div> <!-- /register -->';
+	</div></div> </div></div></div><!-- /register -->';
 
 ?>
 <html lang="en">

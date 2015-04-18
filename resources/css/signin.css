@@ -1,7 +1,8 @@
 body {
   padding-top: 50px;
   padding-bottom: 40px;
-  background-color: #eee;
+  b ackground-color: #eee;
+  background-image: url("/resources/img/bg.JPG");
 }
 
 .form-signin {
