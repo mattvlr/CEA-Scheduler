@@ -66,6 +66,24 @@
 					if($_GET['loc'] == 'editor'){
 						$body = require("map_editor.php");
 					}
+					if($_GET['loc'] == 'success'){
+						$body = require("location_updatesuccess.php");
+					}
+					if($_GET['loc'] == 'fail'){
+						$body = require("location_updatefail.php");
+					}
+				}
+				
+				if(isset($_GET['cart'])){
+					if($_GET['cart'] == 'new'){
+						$body = require("cart_new.php");
+					}
+						if($_GET['cart'] == 'success'){
+						$body = require("cart_success.php");
+					}
+						if($_GET['cart'] == 'failure'){
+						$body = require("cart_failure.php");
+					}
 				}
 			?>
 		</div>

@@ -10,7 +10,7 @@ require_once('navbar.php');
 
 <html>
 <head>
-<title>Failure</title>
+<title>Success!</title>
 <!-- Bootstrap core CSS -->
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
 
@@ -19,8 +19,8 @@ require_once('navbar.php');
 
 </head>
 <body>
-New location was not added. 
+New cart was successfully added. 
 <br>
-<a href="?loc=new">Try again?</a>
+<a href="?cart=new">Add another?</a>
 </body>
 </html>

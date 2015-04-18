@@ -1,17 +1,26 @@
 
 <html>
 <head>
-<title>Update Location</title>
+<title>Delete Location</title>
+
+
+	<!--<script src="/resources/js/jquery.min.js" type="text/javascript"></script> -->
+
+    	<!-- Bootstrap core CSS -->
+    	<link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+
+    	<!-- Custom styles for this template -->
+    	<link href="/resources/css/dashboard.css" rel="stylesheet">
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
+		
+		
 </head>
 <body>
-<table width="600" border="0" align="center" cellpadding="0" cellspacing="1" bgcolor="#CCCCCC">
-<tr>
-<form name="form1" method="post" action="location_checkdelete.php">
-<td>
-<table width="100%" border="0" cellpadding="3" cellspacing="1" bgcolor="#FFFFFF">
-<tr>
-<td colspan="3"><strong>Delete Location</strong></td>
-</tr>
+<center>
+<strong>Delete Location</strong>
+<br><br>
 <?php
 $host = "104.131.179.153";
 $username="web"; // Mysql username
@@ -27,10 +36,7 @@ $sql = "SELECT FullName FROM Stops GROUP BY FullName";
 
 $result = mysql_query($sql, $conn);
 if ($result) {
-	
-	echo '<td width="120">Choose Building</td>';
-	echo '<td width="6">:</td>';
-	echo "<td width=\"350\">";
+	echo 'Choose Building: ';
 	echo "<select name=\"buildings\">";
 
     $num_results = mysql_num_rows($result);
@@ -49,16 +55,9 @@ else { echo "there are problems here";}
 	?>
 
 
-<tr>
-<td>&nbsp;</td>
-<td>&nbsp;</td>
-<td><input type="submit" name="Submit" value="Lookup Building"></td>
-</tr>
-</table>
-</td>
-</form>
-</tr>
-</table>
+<br><br>
+<input type="submit" name="Submit" value="Lookup Building">
+
 
 
     <!-- Bootstrap core CSS -->
@@ -66,7 +65,7 @@ else { echo "there are problems here";}
 
     <!-- Custom styles for this template -->
     <link href="/resources/css/dashboard.css" rel="stylesheet">
-
+</center>
 </body>
 </html>
 

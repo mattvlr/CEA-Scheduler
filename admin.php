@@ -5,3 +5,5 @@
 <a href="?loc=delete">Delete Location</a>
 <br>
 <a href="?loc=editor">Map Editor Test Page</a>
+<br>
+<a href="?cart=new">New Cart</a>

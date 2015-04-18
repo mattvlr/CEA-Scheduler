@@ -19,8 +19,8 @@ require_once('navbar.php');
 
 </head>
 <body>
-New location was not added. 
+New cart was not added. 
 <br>
-<a href="?loc=new">Try again?</a>
+<a href="?cart=new">Try Again?</a>
 </body>
 </html>
