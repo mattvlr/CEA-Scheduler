@@ -15,13 +15,13 @@
 <div class="row">
   <div class="col-lg-6">
     <div class="input-group input-group-lg">
-      <span class="input-group-addon" id="sizing-addon1">User Search</span>
+      <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span> User Search</span>
       <input type="text" id="search" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> List All</button>
       </span>
     </div><!-- /input-group -->
-          <h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
+      <h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
       <ul class="list-group" id="results"></ul>
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->
