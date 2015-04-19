@@ -12,8 +12,17 @@
 <a href="?loc=editor">Map Editor Test Page</a>
 <br>
 <a href="?cart=new">New Cart</a>
-<div class="row">
-  <div class="col-lg-6">
+
+<div class="panel panel-primary" style="width:50%">
+
+  <div class="panel-heading"><h3 class="panel-title">Users</h3></div>
+  <div class="panel-body"> <div class="row">
+     <div class="input-group input-group-lg">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button"> Add </button>
+        <button class="btn btn-default" type="button"> Remove </button>
+      </span>
+    </div>
     <div class="input-group input-group-lg">
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span> User Search</span>
       <input type="text" id="search" class="form-control" placeholder="Search for...">
@@ -23,5 +32,9 @@
     </div><!-- /input-group -->
       <h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
       <ul class="list-group" id="results"></ul>
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+ 
+</div><!-- /.row --></div>
+</div>
+
+
+
