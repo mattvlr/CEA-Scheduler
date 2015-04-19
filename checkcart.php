@@ -25,9 +25,9 @@ $seats = mysql_real_escape_string($seats);
 $notes = mysql_real_escape_string($notes);
 
 //see what the next ID number should be
-$sqlid="SELECT * FROM Carts";
-$idresult= mysql_query($sqlid, $conn); 
-$id=mysql_num_rows($idresult)+1;
+$sqlid= mysql_query("SELECT MAX(ID) as ID FROM Carts", $conn);
+$idresult = mysql_fetch_array($sqlid, MYSQL_NUM); 
+$id=$idresult[0]+1;
 
 //insert form information into database
 $sql="INSERT INTO Carts (ID, Nickname, Num_Seats, MilesDriven, LastGasUp, LastMaintenance, Notes) VALUES ('$id', '$nickname', '$seats', 0, '2015-01-01', '2015-01-01', '$notes')";

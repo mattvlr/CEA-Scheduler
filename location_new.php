@@ -22,32 +22,36 @@
 <center><strong>Enter New Location</strong>
 
 <br><br>
+
 <div class="input-group">
 <span class="input-group-addon" id="basic-addon1" style="width:150px;">Building Code</span>
+<input name="nickname" type="text" id="nickname" value="" aria-describedby="basic-addon1" style="width:300px;"></td>
 </div> 
 
 <div class="input-group">
 <span class="input-group-addon" id="basic-addon1" style="width:150px;">Building Name</span>
+<input name="fullname" type="text" id="fullname" value="" aria-describedby="basic-addon1" style="width:300px;"></td>
 </div> 
 
 <div class="input-group">
 <span class="input-group-addon" id="basic-addon1" style="width:150px;">Street Address</span>
+<input name="address" type="text" id="address" value="" aria-describedby="basic-addon1" style="width:300px;"></td>
 </div> 
 
 <div class="input-group">
 <span class="input-group-addon" id="basic-addon1" style="width:150px;">City</span>
+<input name="city" type="text" id="city" value="" aria-describedby="basic-addon1" style="width:300px;"></td>
 </div> 
-
 
 <div class="input-group">
 <span class="input-group-addon" id="basic-addon1" style="width:150px;">State</span>
+<input name="state" type="text" id="state" value="" aria-describedby="basic-addon1" style="width:300px;"></td>
 </div> 
 
 <div class="input-group">
 <span class="input-group-addon" id="basic-addon1" style="width:150px;">Zipcode</span>
+<input name="zipcode" type="text" id="zipcode" value="" aria-describedby="basic-addon1" style="width:300px;"></td>
 </div> 
-
-
 
 <button type="submit" class="btn btn-default">Submit</button>
 

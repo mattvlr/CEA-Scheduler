@@ -48,18 +48,17 @@ $city = mysql_real_escape_string($city);
 $zipcode = mysql_real_escape_string($zipcode);
 
 //see what the next ID number should be
-$sqlid="SELECT * FROM Stops";
-$idresult= mysql_query($sqlid, $conn); 
-$id=mysql_num_rows($idresult)+1;
+$sqlid= mysql_query("SELECT MAX(ID) as ID FROM Stops", $conn);
+$idresult = mysql_fetch_array($sqlid, MYSQL_NUM); 
+$id=$idresult[0]+1;
 
 //insert form information into database
 $sql="INSERT INTO Stops (ID, Place, FullName, Address, City, State, ZipCode, Latitude, Longitude) VALUES ($id, '$nickname', '$fullname', '$address', '$city', '$state', $zipcode, '$lat', '$long')";
 $result = mysql_query($sql, $conn);
 
-
 if($result){
 // Register new location and redirect to file 
-header("location:location_success.php");}
+header("location:index.php?loc=success");}
 else {
-header("location:location_fail.php");}
+header("location:index.php?loc=failure");}
 ?>
