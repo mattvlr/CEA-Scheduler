@@ -55,3 +55,6 @@ ul#results li:hover h3, ul#results li:hover h4  {
 	color: #3b3b3b;
 	font-weight: bold;
 }
+ol, ul {
+	list-style: none;
+}

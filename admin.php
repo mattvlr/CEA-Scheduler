@@ -18,11 +18,10 @@
       <span class="input-group-addon" id="sizing-addon1">User Search</span>
       <input type="text" id="search" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
-        <button class="btn btn-default" type="button">List All</button>
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> List All</button>
       </span>
     </div><!-- /input-group -->
           <h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>
-      <ul id="results"></ul>
+      <ul class="list-group" id="results"></ul>
   </div><!-- /.col-lg-6 -->
 </div><!-- /.row -->

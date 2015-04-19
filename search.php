@@ -15,15 +15,15 @@ $dbuser = "web";
 $dbpass = "cea";
 
 //	Connection
-global $tutorial_db;
+global $db;
 
-$tutorial_db = new mysqli();
-$tutorial_db->connect($dbhost, $dbuser, $dbpass, $dbname);
-$tutorial_db->set_charset("utf8");
+$db = new mysqli();
+$db->connect($dbhost, $dbuser, $dbpass, $dbname);
+$db->set_charset("utf8");
 
 //	Check Connection
-if ($tutorial_db->connect_errno) {
-    printf("Connect failed: %s\n", $tutorial_db->connect_error);
+if ($db->connect_errno) {
+    printf("Connect failed: %s\n", $db->connect_error);
     exit();
 }
 /************************************************
@@ -33,15 +33,13 @@ if ($tutorial_db->connect_errno) {
 // Define Output HTML Formating
 $html = '';
 $html .= '<li class="result">';
-$html .= '<a target="_blank" href="urlString">';
-$html .= '<h3>nameString</h3>';
+$html .= '<h4>nameString</h4>';
 $html .= '<h4>functionString</h4>';
-$html .= '</a>';
 $html .= '</li>';
 
 // Get Search
 $search_string = preg_replace("/[^A-Za-z0-9]/", " ", $_POST['query']);
-$search_string = $tutorial_db->real_escape_string($search_string);
+$search_string = $db->real_escape_string($search_string);
 
 // Check Length More Than One Character
 if (strlen($search_string) >= 1 && $search_string !== ' ') {
@@ -49,7 +47,7 @@ if (strlen($search_string) >= 1 && $search_string !== ' ') {
 	$query = 'SELECT * FROM Users WHERE FIRST_NAME LIKE "%'.$search_string.'%" OR LAST_NAME LIKE "%'.$search_string.'%";';
 
 	// Do Search
-	$result = $tutorial_db->query($query);
+	$result = $db->query($query);
 	while($results = $result->fetch_array()) {
 		$result_array[] = $results;
 	}
@@ -57,21 +55,19 @@ if (strlen($search_string) >= 1 && $search_string !== ' ') {
 	// Check If We Have Results
 	if (isset($result_array)) {
 		foreach ($result_array as $result) {
-
+				//var_dump($result_array);
 			// Format Output Strings And Hightlight Matches
-			$display_function = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['function']);
-			$display_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['name']);
-			$display_url = 'http://php.net/manual-lookup.php?pattern='.urlencode($result['function']).'&lang=en';
+			
+			$first_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['FIRST_NAME']);
+			$last_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['LAST_NAME']);
 
 			// Insert Name
-			$output = str_replace('nameString', $display_name, $html);
+			//$output = str_replace('firstname', $first_name, $html);
+			//$output = str_replace('lastname', $last_name, $html);
 
 			// Insert Function
-			$output = str_replace('functionString', $display_function, $output);
-
-			// Insert URL
-			$output = str_replace('urlString', $display_url, $output);
-
+			//$output = str_replace('functionString', $display_function, $output);
+			$output = '<li class="list-group-item"><h4>'.$first_name.' '.$last_name.'</h4></li>';
 			// Output
 			echo($output);
 		}
@@ -103,7 +99,7 @@ foreach ($functions as $function) {
 	$query = '';
 	$query = 'INSERT INTO search SET id = "", function = "'.$function.'", name = "'.$function_name.'"';
 
-	$tutorial_db->query($query);
+	$db->query($query);
 }
 */
 ?>
