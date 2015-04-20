@@ -31,7 +31,7 @@
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span> User Search</span>
       <input type="text" id="search" class="form-control" placeholder="Search for...">
       <span class="input-group-btn">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span> List All</button>
+         <a href="?act=ul" class="btn btn-default" role="button"><span class="glyphicon glyphicon-search"></span> List All</a>
       </span>
     </div><!-- /input-group -->
      <center> <h4 id="results-text">Showing results for: <b id="search-string">Array</b></h4>

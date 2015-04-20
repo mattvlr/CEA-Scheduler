@@ -42,6 +42,9 @@
 					if($_GET['act'] == 'profile'){
 						$body = require("profile.php");
 					}
+					if($_GET['act'] == 'ul'){
+						$body = require("userlist.php");
+					}
 	
 				}
 				if(isset($_GET['loc'])){
