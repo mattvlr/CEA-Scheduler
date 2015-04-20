@@ -15,7 +15,8 @@
 <a href="?cart=Add">Add Cart</a>
 -->
 <div id="panelwrapper" style="position:relative">
-<div class="panel panel-primary" style="width:60%; float:left;">
+<div id="leftwrapper" style="float:left; width:60%">
+<div class="panel panel-primary">
 
   <div class="panel-heading"><h3 class="panel-title">Users Panel</h3></div>
   <div class="panel-body"> <div class="row"  style="padding:5px 5px 5px 5px;">
@@ -38,9 +39,9 @@
  
 </div><!-- /.row --></div>
 </div> <!-- users panel -->
-
-
-<div class="panel panel-primary" style="width:35%; float:right; margin-right:3%">
+</div>
+<div id="rightwrapper" style="float:right; width:35%; margin-right:3%">
+<div class="panel panel-primary">
   <div class="panel-heading"><h3 class="panel-title">Stops Panel</h3></div>
   <div class="panel-body"> 
     <div class="media">
@@ -63,21 +64,21 @@
 </div>
 </div>
 
-<div class="panel panel-primary" style="width:35%; float:right; margin-right:3%;margin-left:50%">
+<div class="panel panel-primary">
   <div class="panel-heading"><h3 class="panel-title">Golf Cart Panel</h3></div>
   <div class="panel-body">
    <center><div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:15px 5px 5px 5px">
         <a href="?cart=new" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
         <a href="#" class="btn btn-default" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit </a>
         <a href="#" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center></div>
-</div>
 
-<div class="panel panel-primary" style="width:35%; float:right; margin-right:3%;margin-left:50%">
+</div>
+<div class="panel panel-primary">
   <div class="panel-heading"><h3 class="panel-title">Statistics</h3></div>
   <div class="panel-body">
    </div>
 </div>
-
+</div>
 </div>
 
 
