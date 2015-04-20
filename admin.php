@@ -4,7 +4,7 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
 <!--
-<a href="?loc=new">New Location</a>
+<a href="?loc=Add">Add Location</a>
 <br>
 <a href="?loc=edit">Change Location</a>
 <br> 
@@ -12,17 +12,20 @@
 <br>
 <a href="?loc=editor">Map Editor Test Page</a>
 <br>
-<a href="?cart=new">New Cart</a>
+<a href="?cart=Add">Add Cart</a>
 -->
 <div id="panelwrapper" style="position:relative">
 <div class="panel panel-primary" style="width:60%; float:left;">
 
   <div class="panel-heading"><h3 class="panel-title">Users Panel</h3></div>
   <div class="panel-body"> <div class="row"  style="padding:5px 5px 5px 5px;">
-    <center><div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:5px 5px 5px 5px">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span> New </button>
+    <div class="media">
+      <div class="media-body">   <center><div class="well" style="float:left;">Clicking on a user that shows up in the search will take you to their profile where you can edit their information. The two other buttons
+       let you add and remove users.</div>
+  <div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:5px 5px 5px 5px">
+        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span> Add </button>
         <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-minus"></span> Remove </button>
-    </div></center>
+    </div></center></div></div>
     <div class="input-group input-group-lg"  style="padding:5px 5px 5px 5px">
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span> User Search</span>
       <input type="text" id="search" class="form-control" placeholder="Search for...">
@@ -41,26 +44,38 @@
   <div class="panel-heading"><h3 class="panel-title">Stops Panel</h3></div>
   <div class="panel-body"> 
     <div class="media">
+      <div class="well">
       <div class="media-left">
         <a href="?loc=editor">
           <img class="media-object" src="/resources/img/mapsc.png" alt="Visual Stop Editor">
         </a>
       </div>
+      
       <div class="media-body">
         <a href="?loc-editor"><h4 class="media-heading">Visual Stop Editor</h4></a>
         Edit stop locations inside a google map. Optionally you can add, edit, and remove stops by clicking the buttons below.
-      </div>
+      </div></div>
   </div>
    <center><div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:15px 5px 5px 5px">
-        <a href="?loc=new" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> New </a>
+        <a href="?loc=add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
         <a href="?loc=edit" class="btn btn-default" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit </a>
         <a href="?loc=delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center>
 </div>
 </div>
 
-<div class="panel panel-primary" style="width:35%; float:right; margin-right:3%">
+<div class="panel panel-primary" style="width:35%; float:right; margin-right:3%;margin-left:50%">
   <div class="panel-heading"><h3 class="panel-title">Golf Cart Panel</h3></div>
-  <div class="panel-body"> slkdf</div>
+  <div class="panel-body">
+   <center><div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:15px 5px 5px 5px">
+        <a href="?cart=new" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
+        <a href="#" class="btn btn-default" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit </a>
+        <a href="#" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center></div>
+</div>
+
+<div class="panel panel-primary" style="width:35%; float:right; margin-right:3%;margin-left:50%">
+  <div class="panel-heading"><h3 class="panel-title">Statistics</h3></div>
+  <div class="panel-body">
+   </div>
 </div>
 
 </div>
