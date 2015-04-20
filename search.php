@@ -44,7 +44,7 @@ $search_string = $db->real_escape_string($search_string);
 // Check Length More Than One Character
 if (strlen($search_string) >= 1 && $search_string !== ' ') {
 	// Build Query
-	$query = 'SELECT * FROM Users WHERE FIRST_NAME LIKE "%'.$search_string.'%" OR LAST_NAME LIKE "%'.$search_string.'%" ORDER BY PERMISSION DESC;';
+	$query = 'SELECT * FROM Users WHERE FIRST_NAME LIKE "%'.$search_string.'%" OR LAST_NAME LIKE "%'.$search_string.'%" ORDER BY LAST_NAME ASC;';
 
 	// Do Search
 	$result = $db->query($query);
@@ -62,15 +62,15 @@ if (strlen($search_string) >= 1 && $search_string !== ' ') {
 
 			
 			if($result['PERMISSION'] == 3){ //admin
-				$output = '<li class="list-group-item list-group-item-danger"><h4>'.$first_name.' '.$last_name.'<span class="badge" style="float:right">Admin</span></h4></li>';
+				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-danger"><h4>'.$first_name.' '.$last_name.'<span class="badge" style="float:right">Admin</span></h4></li></a>';
 			} elseif($result['PERMISSION'] == 2){ //driver
-				$output = '<li class="list-group-item list-group-item-info"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Driver</span></li>';
+				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-info"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Driver</span></h4></li></a>';
 			} elseif($result['PERMISSION'] == 1){ //student
-				$output = '<li class="list-group-item list-group-item-success"><h4>'.$first_name.' '.$last_name.'<span class="badge" style="float:right">Student</span></h4></li>';
+				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-success"><h4>'.$first_name.' '.$last_name.'<span class="badge" style="float:right">Student</span></h4></li></a>';
 			} elseif($result['PERMISSION'] == 0){ //guest
-				$output = '<li class="list-group-item"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Guest</span></h4></li>';
+				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Guest</span></h4></li></a>';
 			} else{ //inactive / everyone else??
-				$output = '<li class="list-group-item list-group-item-warning"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Inactive</span></h4></li>';
+				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-warning"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Inactive</span></h4></li></a>';
 			}
 			// Output
 			echo($output);
@@ -88,22 +88,4 @@ if (strlen($search_string) >= 1 && $search_string !== ' ') {
 }
 
 
-/*
-// Build Function List (Insert All Functions Into DB - From PHP)
-
-// Compile Functions Array
-$functions = get_defined_functions();
-$functions = $functions['internal'];
-
-// Loop, Format and Insert
-foreach ($functions as $function) {
-	$function_name = str_replace("_", " ", $function);
-	$function_name = ucwords($function_name);
-
-	$query = '';
-	$query = 'INSERT INTO search SET id = "", function = "'.$function.'", name = "'.$function_name.'"';
-
-	$db->query($query);
-}
-*/
 ?>

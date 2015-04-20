@@ -39,6 +39,9 @@
 					if($_GET['act']== 'admin'){
 						$body = require("admin.php");
 					}
+					if($_GET['act'] == 'profile'){
+						$body = require("profile.php");
+					}
 	
 				}
 				if(isset($_GET['loc'])){

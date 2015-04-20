@@ -69,7 +69,7 @@ if($_SESSION['PERMISSION'] == 3) // admin
                  <li><a href="?act=admin">Settings Panel</a></li>
                  <li><a href="#">Schedule</a></li>
                  <li class="divider"></li>
-                 <li><a href="#">Profile</a></li>
+                 <li><a href="?act=profile">Profile</a></li>
                  <li><a href="#">Statistics</a></li>
                  <li><a href="?act=logout"">Logout</a></li>
 
