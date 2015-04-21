@@ -58,7 +58,21 @@ if($p != 3){
   $r = "readonly";
 }
 
+function deleteuser() {
+    //delete information into database
+	$sql="DELETE from Users WHERE USERNAME = '$u'";
+	$result = mysql_query($sql, $conn);
 
+	if($result){
+	// Register delete location and redirect to file 
+	header("Location: index.php?loc=uS");}
+	else {
+	header("Location: index.php?loc=uF");}
+	} 
+
+function updateuser() {
+    //code to be executed;
+} 
 
 ?>
 <div id="wrapper" style="position:relative">
@@ -112,8 +126,8 @@ if($p != 3){
       <?php if($_SESSION['PERMISSION'] == 3){
         echo '<center>
         <div class="btn-group btn-group-lg" role="group">
-		<a href="?user=change&u=' .$u. '" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span>Update User</a>
-		<a href="?user=delete&u=' .$u. '" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span>Remove User</a>
+		<button class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span>Update User</button>
+		<button class="btn btn-default" role="button" onclick="'. deleteuser() .'"><span class="glyphicon glyphicon-plus"></span>Remove User</button>
         </div>
         </center>';}
         ?>
