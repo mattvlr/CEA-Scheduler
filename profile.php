@@ -1,5 +1,6 @@
 
 <?php
+var_dump($_POST);
 if(isset($_POST)){
   if(isset($_POST['delete'])){
     deleteuser();
@@ -69,16 +70,35 @@ if($_SESSION['PERMISSION'] != 3){
 }
 
 function deleteuser() {
+  $dbhost = "104.131.179.153";
+$dbname = "Scheduler";
+$dbuser = "web";
+$dbpass = "cea";
+
+//  Connection
+global $db;
+
+$db = new mysqli();
+$db->connect($dbhost, $dbuser, $dbpass, $dbname);
+$db->set_charset("utf8");
+
+//  Check Connection
+if ($db->connect_errno) {
+  printf("Connect failed: %s\n", $db->connect_error);
+  exit();
+}
     //delete information into database
 	$usrname = $_POST['username'];
-	$sql="DELETE from Users WHERE USERNAME = '$usrname'";
-	$result = mysql_query($sql, $conn);
-
-	if($result){
+  echo $usrname;
+	$sql='DELETE from Users WHERE USERNAME = "'. $usrname.'"';
+  echo($sql);
+	$result = $db->query($sql);
+  var_dump($result);
+	//if($result){
 	// Register delete location and redirect to file 
-	header("Location: index.php?loc=uS");}
-	else {
-	header("Location: index.php?loc=uF");}
+	//header("Location: index.php?loc=uS");}
+	//else {
+//	header("Location: index.php?loc=uF");}
 	} 
 
 function updateuser() {
