@@ -87,6 +87,8 @@ while($results = $result->fetch_array()) {
 <br>
 <label for"dob">Date of Birth: </label><input id="dob" type="date" name = "dob" class="form-control input-lg" value='<?php if($u != NULL){echo $dob;} ?>'>
 <br>
+<?php if($_SESSION['PERMISSION'] == 3){
+  echo '
 <form role="form">
     <div class="form-group">
       <label for="sel1">Permission</label>
@@ -99,13 +101,17 @@ while($results = $result->fetch_array()) {
       </select>
     </div>
   </form>
+  ';
+}?>
   <br>
-  <center>
+  <?php if($_SESSION['PERMISSION'] == 3){
+  echo '<center>
   <div class="btn-group btn-group-lg" role="group">
     <button type="button" class="btn btn-default">Update User</button>
     <button type="button" class="btn btn-default">Remove User</button>
   </div>
-</center>
+</center>';}
+?>
 </div>
 </div>
 </div>
