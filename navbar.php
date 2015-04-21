@@ -17,7 +17,7 @@ else if($_SESSION['PERMISSION'] == 3)
 $nav_pages = "";
 if($_SESSION['PERMISSION'] == 2) // driver
 {
-  $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+  $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" style="margin-right:1%">
                  <ul class="nav navbar-nav">
                  <li class="dropdown">
                  <a href="index.php?act=admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">'. $_SESSION['USERNAME'] .'<span class="caret"></span></a>
@@ -38,7 +38,7 @@ if($_SESSION['PERMISSION'] == 2) // driver
 }
 if($_SESSION['PERMISSION'] == 1) // student
 {
-  $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+  $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" style="margin-right:1%">
                  <ul class="nav navbar-nav">
                  <li class="dropdown">
                  <a href="index.php?act=admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">'. $_SESSION['USERNAME'] .'<span class="caret"></span></a>
@@ -58,7 +58,7 @@ if($_SESSION['PERMISSION'] == 1) // student
 }
 if($_SESSION['PERMISSION'] == 3) // admin
 {
-  $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+  $nav_pages = ' <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" style="margin-right:1%">
                  <ul class="nav navbar-nav">
                  <li class="dropdown">
                  <a href="index.php?act=admin" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">'. $_SESSION['USERNAME'] .'<span class="caret"></span></a>

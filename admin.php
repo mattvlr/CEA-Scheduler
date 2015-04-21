@@ -69,8 +69,8 @@
   <div class="panel-body">
    <center><div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:15px 5px 5px 5px">
         <a href="?cart=new" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
-        <a href="#" class="btn btn-default" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit </a>
-        <a href="#" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center></div>
+        <a href="?cart=change" class="btn btn-default" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit </a>
+        <a href="?cart=delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center></div>
 
 </div>
 <div class="panel panel-primary">

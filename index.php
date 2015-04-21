@@ -90,6 +90,12 @@
 						if($_GET['cart'] == 'failure'){
 						$body = require("cart_failure.php");
 					}
+						if($_GET['cart'] == 'delete'){
+						$body = require("cart_delete.php");
+					}
+						if($_GET['cart'] == 'change'){
+						$body = require("cart_change.php");
+					}
 				}
 			?>
 		</div>
