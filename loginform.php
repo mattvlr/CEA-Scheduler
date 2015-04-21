@@ -42,8 +42,12 @@ if(isset($_POST['username']) && isset($_POST['password']))
     $loginStatus = "<font color='green'>Login success!</font>";
     $_SESSION = $mysql->getSessionInfo($id);
     $_SESSION['id']= $id;
-    var_dump($_SESSION);
-    header("Location: index.php?act=m");
+    if($_SESSION['PERMISSION'] == 3){
+      header("Location: index.php?act=admin");  
+    }else{
+      header("Location: index.php?act=profile");
+    }
+    
   }
   else  // not logged in
   {

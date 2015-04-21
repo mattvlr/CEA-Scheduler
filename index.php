@@ -33,9 +33,6 @@
 					if($_GET['act']== 'forgot'){
 						$body = require("forgot.php");
 					}
-					if($_GET['act']== 'm'){
-						$body = require("main.php");
-					}
 					if($_GET['act']== 'admin'){
 						$body = require("admin.php");
 					}
@@ -114,6 +111,9 @@
 						$body = require("user_change.php");
 					}
 				}
+			
+			
+				
 			?>
 		</div>
 	</body>
