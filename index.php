@@ -105,7 +105,7 @@
 						$body = require("user_failure.php");
 					}
 						if($_GET['user'] == 'delete'){
-						$body = require("user_delete.php");
+						$body = require("user_checkdelete.php");
 					}
 						if($_GET['user'] == 'change'){
 						$body = require("user_change.php");

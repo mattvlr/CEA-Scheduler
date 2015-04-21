@@ -91,6 +91,7 @@ if($p != 3){
       <br>
       <label for"dob">Date of Birth: </label><input id="dob" type="date" name = "dob" class="form-control input-lg" value='<?php if($u != NULL){echo $dob;} ?>'  <?php echo $r;?>>
       <br>
+
       <?php if($_SESSION['PERMISSION'] == 3){
         echo '
         <form role="form">
@@ -111,8 +112,8 @@ if($p != 3){
       <?php if($_SESSION['PERMISSION'] == 3){
         echo '<center>
         <div class="btn-group btn-group-lg" role="group">
-        <button type="button" class="btn btn-default">Update User</button>
-        <button type="button" class="btn btn-default">Remove User</button>
+		<a href="?user=change&u=' .$u. '" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span>Update User</a>
+		<a href="?user=delete&u=' .$u. '" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span>Remove User</a>
         </div>
         </center>';}
         ?>
