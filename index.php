@@ -97,6 +97,23 @@
 						$body = require("cart_change.php");
 					}
 				}
+				if(isset($_GET['user'])){
+						if($_GET['user'] == 'new'){
+						$body = require("user_new.php");
+					}
+						if($_GET['user'] == 'success'){
+						$body = require("user_success.php");
+					}
+						if($_GET['user'] == 'failure'){
+						$body = require("user_failure.php");
+					}
+						if($_GET['user'] == 'delete'){
+						$body = require("user_delete.php");
+					}
+						if($_GET['user'] == 'change'){
+						$body = require("user_change.php");
+					}
+				}
 			?>
 		</div>
 	</body>

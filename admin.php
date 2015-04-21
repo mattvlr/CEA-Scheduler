@@ -24,8 +24,8 @@
       <div class="media-body">   <center><div class="well" style="float:left;">Clicking on a user that shows up in the search will take you to their profile where you can edit their information. The two other buttons
        let you add and remove users.</div>
   <div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:5px 5px 5px 5px">
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-plus"></span> Add </button>
-        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-minus"></span> Remove </button>
+        <a href="?user=new" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
+        <a href="?user=delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center>
     </div></center></div></div>
     <div class="input-group input-group-lg"  style="padding:5px 5px 5px 5px">
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span> User Search</span>
