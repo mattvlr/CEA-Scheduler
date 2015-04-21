@@ -97,11 +97,11 @@ if($p != 3){
         <div class="form-group">
         <label for="sel1">Permission</label>
         <select class="form-control input-lg" id="sel1">
-        <option <?php echo $sel; ?> value="-1">Inactive</option>
-        <option <?php echo $sel1; ?> value="0">Guest</option>
-        <option <?php echo $sel2; ?> value="1">Student</option>
-        <option <?php echo $sel3; ?> value="2">Driver</option>
-        <option <?php echo $sel4; ?> value="3">Admin</option>
+        <option '. $sel .' value="-1">Inactive</option>
+        <option '. $sel1 .' value="0">Guest</option>
+        <option '. $sel2 .' value="1">Student</option>
+        <option '. $sel3 .' value="2">Driver</option>
+        <option '. $sel4 .' value="3">Admin</option>
         </select>
         </div>
         </form>
