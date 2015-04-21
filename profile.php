@@ -1,21 +1,59 @@
 
 <?php
 if(isset($_GET['u'])){
-	var_dump($_GET);
+	$u = $_GET['u'];
 }else{
-$permission = ''; 
-if($_SESSION['PERMISSION'] == 1)
-	$permission = "Student";
-else if($_SESSION['PERMISSION'] == 2)
-	$permission = "Driver";
-else if($_SESSION['PERMISSION'] == 3)
-	$permission = "Administrator";
-
-var_dump($_SESSION);
-$text ='<br><br><br><p>Your name is <bold><font size="5">'. $_SESSION['FIRST_NAME'] . '</font></bold> <bold><font size="5">'. $_SESSION['LAST_NAME'] . '</font></bold>
-		. Your username is <bold><font size="5">'. $_SESSION['USERNAME'] . '</font></bold> and your permission on this site is <bold><font size="5">'. $permission . '</font></bold></p> ';
-echo $text;
+  $u =$_SESSION['USERNAME'];
 }
+
+
+$dbhost = "104.131.179.153";
+$dbname = "Scheduler";
+$dbuser = "web";
+$dbpass = "cea";
+
+//  Connection
+global $db;
+
+$db = new mysqli();
+$db->connect($dbhost, $dbuser, $dbpass, $dbname);
+$db->set_charset("utf8");
+
+//  Check Connection
+if ($db->connect_errno) {
+    printf("Connect failed: %s\n", $db->connect_error);
+    exit();
+}
+$query = 'SELECT * FROM Users WHERE USERNAME="'.$u.'"';
+$result = $db->query($query);
+while($results = $result->fetch_array()) {
+    $result_array[] = $results;
+  }
+
+  // Check If We Have Results
+  if (isset($result_array)) {
+    foreach ($result_array as $result) {
+      $fn = $result['FIRST_NAME'];
+      $ln = $result['LAST_NAME'];
+      $e = $result['EMAIL'];
+      $dob = $result['DATE_OF_BIRTH'];
+      $p = $result['PERMISSION'];
+
+      if($p == -1){
+        $sel = "selected";
+      }else if($p == 0){
+        $sel1 = "selected";
+      }else if($p == 1){
+        $sel2 = "selected";
+      }else if($p == 2){
+        $sel3 = "selected";
+      }else if($p == 3){
+        $sel4 = "selected";
+      }
+
+}
+}
+ 
 
 
  ?>
@@ -29,33 +67,35 @@ echo $text;
 
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">Username</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $u;} ?>'>
 </div>
 <br>
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">First Name</span>
-  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $fn;} ?>'>
 </div>
 <br>
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">Last Name</span>
-  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1">
+  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $ln;} ?>'>
 </div>
 <br>
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">Email</span>
-  <input type="text" class="form-control" placeholder="example@something.com" aria-describedby="sizing-addon1">
+  <input type="text" class="form-control" placeholder="example@something.com" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $e;} ?>'>
 </div>
+<br>
+<label for"dob">Date of Birth: </label><input id="dob" type="date" name = "dob" class="form-control input-lg" value='<?php if($u != NULL){echo $dob;} ?>'>
 <br>
 <form role="form">
     <div class="form-group">
       <label for="sel1">Permission</label>
       <select class="form-control input-lg" id="sel1">
-        <option value="-1">Inactive</option>
-        <option value="0">Guest</option>
-        <option value="1">Student</option>
-        <option value="2">Driver</option>
-        <option value="3">Admin</option>
+        <option <?php echo $sel; ?> value="-1">Inactive</option>
+        <option <?php echo $sel1; ?> value="0">Guest</option>
+        <option <?php echo $sel2; ?> value="1">Student</option>
+        <option <?php echo $sel3; ?> value="2">Driver</option>
+        <option <?php echo $sel4; ?> value="3">Admin</option>
       </select>
     </div>
   </form>
