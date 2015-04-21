@@ -3,7 +3,7 @@
 if(isset($_GET['u'])){
 	$u = $_GET['u'];
 }else{
-  $u =$_SESSION['USERNAME'];
+  $u = $_SESSION['USERNAME'];
 }
 
 
@@ -53,6 +53,10 @@ while($results = $result->fetch_array()) {
 
 }
 }
+
+ if($p != 3){
+  $r = "readonly";
+ }
  
 
 
@@ -67,25 +71,25 @@ while($results = $result->fetch_array()) {
 
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">Username</span>
-  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $u;} ?>'>
+  <input type="text" class="form-control"  <?php echo $disable;?> placeholder="Username" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $u;} ?>' <?php echo $r;?>>
 </div>
 <br>
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">First Name</span>
-  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $fn;} ?>'>
+  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $fn;} ?>'  <?php echo $r;?>>
 </div>
 <br>
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">Last Name</span>
-  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $ln;} ?>'>
+  <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $ln;} ?>'  <?php echo $r;?>>
 </div>
 <br>
 <div class="input-group input-group-lg">
   <span class="input-group-addon" id="basic-addon1">Email</span>
-  <input type="text" class="form-control" placeholder="example@something.com" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $e;} ?>'>
+  <input type="text" class="form-control" placeholder="example@something.com" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $e;} ?>'  <?php echo $r;?>>
 </div>
 <br>
-<label for"dob">Date of Birth: </label><input id="dob" type="date" name = "dob" class="form-control input-lg" value='<?php if($u != NULL){echo $dob;} ?>'>
+<label for"dob">Date of Birth: </label><input id="dob" type="date" name = "dob" class="form-control input-lg" value='<?php if($u != NULL){echo $dob;} ?>'  <?php echo $r;?>>
 <br>
 <?php if($_SESSION['PERMISSION'] == 3){
   echo '
@@ -113,9 +117,10 @@ while($results = $result->fetch_array()) {
 </center>';}
 ?>
 </div>
+
 </div>
 </div>
-</div>
+
 <div id="right-wrapper" style="float:right;width:43%;margin-right:3%;">
   <div class="panel panel-primary" style="">
   <div class="panel-heading"><h3 class="panel-title">User Schedule Panel</h3></div>
@@ -123,3 +128,6 @@ while($results = $result->fetch_array()) {
   </div>
 </div>
 </div>
+
+
+
