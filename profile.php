@@ -178,8 +178,8 @@ function updateuser() {
       <?php if($_SESSION['PERMISSION'] == 3){
         echo '<center>
         <div class="btn-group btn-group-lg" role="group">
-		<button type="submit" name="update" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span>Update User</button>
-		<button type="submit" name="delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span>Remove User</button>
+		<button type="submit" name="update" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Update User</button>
+		<button type="submit" name="delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Remove User</button>
         </div>
         </center>';}
         ?>

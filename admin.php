@@ -53,7 +53,7 @@
       </div>
       
       <div class="media-body">
-        <a href="?loc-editor"><h4 class="media-heading">Visual Stop Editor</h4></a>
+        <a href="?loc=editor"><h4 class="media-heading">Visual Stop Editor</h4></a>
         Edit stop locations inside a google map. Optionally you can add, edit, and remove stops by clicking the buttons below.
       </div></div>
   </div>
