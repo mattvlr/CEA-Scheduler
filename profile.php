@@ -47,6 +47,8 @@ if (isset($result_array)) {
     $e = $result['EMAIL'];
     $dob = $result['DATE_OF_BIRTH'];
     $p = $result['PERMISSION'];
+    $ua = $result['UniversityID'];
+    $notes = "";
 
     if($p == -1){
       $sel = "selected";
@@ -159,6 +161,11 @@ function updateuser() {
         <input type="text" class="form-control" name="email" placeholder="example@something.com" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $e;} ?>'  <?php echo $r;?>>
       </div>
       <br>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="basic-addon1">University ID</span>
+        <input type="text" class="form-control" name="UAID" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $ua;} ?>'  <?php echo $r;?>>
+      </div>
+      <br>
       <label for"dob">Date of Birth: </label><input id="dob" type="date" name = "dob" class="form-control input-lg" value='<?php if($u != NULL){echo $dob;} ?>'  <?php echo $r;?>>
       <br>
 
@@ -172,6 +179,9 @@ function updateuser() {
         <option '. $sel3 .' value="2">Driver</option>
         <option '. $sel4 .' value="3">Admin</option>
         </select>
+        <br>
+        <label for="n">Student Notes</label>
+        <textarea  id="n" name="notes" class="form-control" rows="3">'.$notes.'</textarea>
         ';
       }?>
       <br>
