@@ -72,30 +72,30 @@ if($_SESSION['PERMISSION'] != 3){
 }
 
 function deleteuser() {
-  $dbhost = "104.131.179.153";
-$dbname = "Scheduler";
-$dbuser = "web";
-$dbpass = "cea";
+	$dbhost = "104.131.179.153";
+	$dbname = "Scheduler";
+	$dbuser = "web";
+	$dbpass = "cea";
 
-//  Connection
-global $db;
+	//  Connection
+	global $db;
 
-$db = new mysqli();
-$db->connect($dbhost, $dbuser, $dbpass, $dbname);
-$db->set_charset("utf8");
+	$db = new mysqli();
+	$db->connect($dbhost, $dbuser, $dbpass, $dbname);
+	$db->set_charset("utf8");
 
-//  Check Connection
-if ($db->connect_errno) {
-  printf("Connect failed: %s\n", $db->connect_error);
-  exit();
-}
+	//  Check Connection
+	if ($db->connect_errno) {
+		printf("Connect failed: %s\n", $db->connect_error);
+		exit();
+		}
     //delete information into database
 	$usrname = $_POST['username'];
-  echo $usrname;
+	echo $usrname;
 	$sql='DELETE from Users WHERE USERNAME = "'. $usrname.'"';
-  echo($sql);
+	echo($sql);
 	$result = $db->query($sql);
-  var_dump($result);
+	var_dump($result);
 	//if($result){
 	// Register delete location and redirect to file 
 	//header("Location: index.php?loc=uS");}
@@ -104,6 +104,24 @@ if ($db->connect_errno) {
 	} 
 
 function updateuser() {
+	$dbhost = "104.131.179.153";
+	$dbname = "Scheduler";
+	$dbuser = "web";
+	$dbpass = "cea";
+
+	//  Connection
+	global $db;
+
+	$db = new mysqli();
+	$db->connect($dbhost, $dbuser, $dbpass, $dbname);
+	$db->set_charset("utf8");
+
+	//  Check Connection
+	if ($db->connect_errno) {
+		printf("Connect failed: %s\n", $db->connect_error);
+		exit();
+		}
+		
     $firstname=$_POST['first_name'];
 	$lastname=$_POST['last_name'];
 	$email=$_POST['email'];
@@ -121,16 +139,18 @@ function updateuser() {
 	$email = mysql_real_escape_string($email);
 	$birth = mysql_real_escape_string($birth);
 	$permission = mysql_real_escape_string($permission);
+	
+	echo $permission; 
 
 	//insert form information into database
-	$sql2="UPDATE Carts SET Nickname = '$nickname', Num_Seats = '$seats', MilesDriven = '$miles', LastGasUp = '$gas', LastMaintenance = '$main', notes = '$notes' WHERE ID = '$id'";
-	$result2 = mysql_query($sql2, $conn);
+	//$sql2="UPDATE Users SET Nickname = '$nickname', Num_Seats = '$seats', MilesDriven = '$miles', LastGasUp = '$gas', LastMaintenance = '$main', notes = '$notes' WHERE ID = '$id'";
+	//$result2 = mysql_query($sql2, $conn);
 
-	if($result2){
+	//if($result2){
 	// Register new location and redirect to file 
-	header("Location: index.php?loc=uS");}
-	else {
-	header("Location: index.php?loc=uF");}	
+	//header("Location: index.php?loc=uS");}
+	//else {
+	//header("Location: index.php?loc=uF");}	
 } 
 ?>
 <div id="wrapper" style="position:relative">
