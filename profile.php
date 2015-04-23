@@ -128,20 +128,22 @@ function updateuser() {
 	$email=$_POST['email'];
 	$birth=$_POST['dob'];
 	$permission=$_POST['perm'];
-	//$notes=$_POST['notes'];
+	$notes=$_POST['notes'];
 
 	$firstname = stripslashes($firstname);
 	$lastname = stripslashes($lastname);
 	$email = stripslashes($email);
 	$birth = stripslashes($birth);
 	$permission = stripslashes($permission);
-	//$notes = stripslashes($notes);
+	$notes = stripslashes($notes);
 	
 	$uname = $_POST['username'];
 	 
 	//insert form information into database
-	$sql3='UPDATE Users SET FIRST_NAME = "' .$firstname. '", LAST_NAME = "'.$lastname. '", EMAIL = "' . $email. '", DATE_OF_BIRTH = "' .$birth. '", PERMISSION= "' .$permission. '" WHERE USERNAME = "' .$uname. '"';
+	$sql3='UPDATE Users SET FIRST_NAME = "' .$firstname. '", LAST_NAME = "'.$lastname. '", EMAIL = "' . $email. '", DATE_OF_BIRTH = "' .$birth. '", PERMISSION= "' .$permission. '", Notes ="' .$notes. '" WHERE USERNAME = "' .$uname. '"';
 
+	echo($sql3); 
+	
 	$result3 = $db->query($sql3);
 	var_dump($result3);
 	if($result3){
