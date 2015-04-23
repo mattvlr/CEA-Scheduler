@@ -49,7 +49,7 @@ if (isset($result_array)) {
     $dob = $result['DATE_OF_BIRTH'];
     $p = $result['PERMISSION'];
     $ua = $result['UniversityID'];
-   $n = $result['Notes'];
+    $n = $result['Notes'];
 
     if($p == -1){
       $sel = "selected";
@@ -199,7 +199,7 @@ function updateuser() {
         </select>
         <br>
         <label for="n">Student Notes</label>
-        <textarea  id="n" name="notes" class="form-control" rows="3">'.$notes.'</textarea>
+        <textarea  id="n" name="notes" class="form-control" rows="3">'.$n.'</textarea>
         ';
       }?>
       <br>
