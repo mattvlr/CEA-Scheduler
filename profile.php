@@ -34,11 +34,20 @@ if ($db->connect_errno) {
   exit();
 }
 $query = 'SELECT * FROM Users WHERE USERNAME="'.$u.'"';
+$query_n = 'SELECT * FROM Students WHERE Username="'.$u.'"';
 $result = $db->query($query);
+$s_result = $db->query($query_n);
 while($results = $result->fetch_array()) {
   $result_array[] = $results;
 }
-
+while($s_results = $s_result->fetch_array()) {
+  $s_result_array[] = $s_results;
+}
+if(isset($s_result_array)){
+  foreach($s_result_array as $s_result){
+    $notes = $s_result["Notes"];
+  }
+}
   // Check If We Have Results
 if (isset($result_array)) {
   foreach ($result_array as $result) {
@@ -48,7 +57,7 @@ if (isset($result_array)) {
     $dob = $result['DATE_OF_BIRTH'];
     $p = $result['PERMISSION'];
     $ua = $result['UniversityID'];
-    $notes = "";
+   
 
     if($p == -1){
       $sel = "selected";
