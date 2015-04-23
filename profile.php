@@ -47,6 +47,8 @@ if (isset($result_array)) {
     $ln = $result['LAST_NAME'];
     $e = $result['EMAIL'];
     $dob = $result['DATE_OF_BIRTH'];
+	$nrides = $result['NumRides'];
+	$nshow = $result['NoShows'];
     $p = $result['PERMISSION'];
     $ua = $result['UniversityID'];
     $n = $result['Notes'];
@@ -125,6 +127,7 @@ function updateuser() {
 		
     $firstname=$_POST['first_name'];
 	$lastname=$_POST['last_name'];
+	$uid=$_POST['UAID'];
 	$email=$_POST['email'];
 	$birth=$_POST['dob'];
 	$permission=$_POST['perm'];
@@ -132,6 +135,7 @@ function updateuser() {
 
 	$firstname = stripslashes($firstname);
 	$lastname = stripslashes($lastname);
+	$uid = stripslashes($uid);
 	$email = stripslashes($email);
 	$birth = stripslashes($birth);
 	$permission = stripslashes($permission);
@@ -140,7 +144,7 @@ function updateuser() {
 	$uname = $_POST['username'];
 	 
 	//insert form information into database
-	$sql3='UPDATE Users SET FIRST_NAME = "' .$firstname. '", LAST_NAME = "'.$lastname. '", EMAIL = "' . $email. '", DATE_OF_BIRTH = "' .$birth. '", PERMISSION= "' .$permission. '", Notes ="' .$notes. '" WHERE USERNAME = "' .$uname. '"';
+	$sql3='UPDATE Users SET FIRST_NAME = "' .$firstname. '", LAST_NAME = "'.$lastname. '", EMAIL = "' . $email. '", DATE_OF_BIRTH = "' .$birth. '", PERMISSION= "' .$permission. '", Notes ="' .$notes. '", UniversityID ="' .$uid. '" WHERE USERNAME = "' .$uname. '"';
 
 	echo($sql3); 
 	
@@ -182,6 +186,16 @@ function updateuser() {
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="basic-addon1">University ID</span>
         <input type="text" class="form-control" name="UAID" placeholder="" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $ua;} ?>'  <?php echo $r;?>>
+      </div>
+	  <br>
+	  <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="basic-addon1">Number of Rides</span>
+        <input type="text" class="form-control" name="nrides" placeholder="0" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $nrides;} ?>'  <?php echo $r;?>>
+      </div>
+      <br>
+	  <div class="input-group input-group-lg">
+        <span class="input-group-addon" id="basic-addon1">No Shows</span>
+        <input type="text" class="form-control" name="nshows" placeholder="0" aria-describedby="sizing-addon1" value='<?php if($u != NULL){echo $nshow;} ?>'  <?php echo $r;?>>
       </div>
       <br>
       <label for"dob">Date of Birth: </label><input id="dob" type="date" name = "dob" class="form-control input-lg" value='<?php if($u != NULL){echo $dob;} ?>'  <?php echo $r;?>>
