@@ -58,7 +58,7 @@
       </div></div>
   </div>
    <center><div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:15px 5px 5px 5px">
-        <a href="?loc=add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
+        <a href="?loc=new" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
         <a href="?loc=edit" class="btn btn-default" role="button"><span class="glyphicon glyphicon-pencil"></span> Edit </a>
         <a href="?loc=delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center>
 </div>
