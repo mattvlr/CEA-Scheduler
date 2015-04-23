@@ -148,18 +148,18 @@ function updateuser() {
 	$email = mysql_real_escape_string($email);
 	$birth = mysql_real_escape_string($birth);
 	$permission = mysql_real_escape_string($permission);
-	
-	echo $permission; 
 
+	$uname = $_POST['username'];
+	 
 	//insert form information into database
-	//$sql2="UPDATE Users SET Nickname = '$nickname', Num_Seats = '$seats', MilesDriven = '$miles', LastGasUp = '$gas', LastMaintenance = '$main', notes = '$notes' WHERE ID = '$id'";
-	//$result2 = mysql_query($sql2, $conn);
+	$sql3="UPDATE Users SET FIRST_NAME = '$firstname', LAST_NAME = '$lastname', EMAIL = '$email',  = '$gas', LastMaintenance = '$main', notes = '$notes' WHERE USERNAME = '$uname'";
+	$result3 = mysql_query($sql3, $conn);
 
-	//if($result2){
+	if($result3){
 	// Register new location and redirect to file 
-	//header("Location: index.php?loc=uS");}
-	//else {
-	//header("Location: index.php?loc=uF");}	
+	header("Location: index.php?loc=uS");}
+	else {
+	header("Location: index.php?loc=uF");}	
 } 
 ?>
 <div id="wrapper" style="position:relative">
