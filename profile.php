@@ -34,20 +34,12 @@ if ($db->connect_errno) {
   exit();
 }
 $query = 'SELECT * FROM Users WHERE USERNAME="'.$u.'"';
-$query_n = 'SELECT * FROM Students WHERE Username="'.$u.'"';
 $result = $db->query($query);
-$s_result = $db->query($query_n);
 while($results = $result->fetch_array()) {
   $result_array[] = $results;
 }
-while($s_results = $s_result->fetch_array()) {
-  $s_result_array[] = $s_results;
-}
-if(isset($s_result_array)){
-  foreach($s_result_array as $s_result){
-    $notes = $s_result["Notes"];
-  }
-}
+
+
   // Check If We Have Results
 if (isset($result_array)) {
   foreach ($result_array as $result) {
@@ -57,7 +49,7 @@ if (isset($result_array)) {
     $dob = $result['DATE_OF_BIRTH'];
     $p = $result['PERMISSION'];
     $ua = $result['UniversityID'];
-   
+   $n = $result['Notes'];
 
     if($p == -1){
       $sel = "selected";
@@ -135,32 +127,27 @@ function updateuser() {
 	$lastname=$_POST['last_name'];
 	$email=$_POST['email'];
 	$birth=$_POST['dob'];
-	$permission=$_POST['permission'];
+	$permission=$_POST['perm'];
+	//$notes=$_POST['notes'];
 
 	$firstname = stripslashes($firstname);
 	$lastname = stripslashes($lastname);
 	$email = stripslashes($email);
 	$birth = stripslashes($birth);
 	$permission = stripslashes($permission);
+	//$notes = stripslashes($notes);
 	
-	$firstname = mysql_real_escape_string($firstname);
-	$lastname = mysql_real_escape_string($lastname);
-	$email = mysql_real_escape_string($email);
-	$birth = mysql_real_escape_string($birth);
-	$permission = mysql_real_escape_string($permission);
-
 	$uname = $_POST['username'];
 	 
 	//insert form information into database
-	$sql3="UPDATE Users SET FIRST_NAME = '$firstname', LAST_NAME = '$lastname', EMAIL = '$email',  = '$gas', LastMaintenance = '$main', notes = '$notes' WHERE USERNAME = '$uname'";
-	$result3 = mysql_query($sql3, $conn);
+	$sql3='UPDATE Users SET FIRST_NAME = "' .$firstname. '", LAST_NAME = "'.$lastname. '", EMAIL = "' . $email. '", DATE_OF_BIRTH = "' .$birth. '", PERMISSION= "' .$permission. '" WHERE USERNAME = "' .$uname. '"';
 
+	$result3 = $db->query($sql3);
+	var_dump($result3);
 	if($result3){
-	// Register new location and redirect to file 
-	header("Location: index.php?loc=uS");}
-	else {
-	header("Location: index.php?loc=uF");}	
-} 
+	echo ("Updated");
+	}
+}
 ?>
 <div id="wrapper" style="position:relative">
   <div id="left-wrapper" style="float:left;width:50%;margin-right:4%">
