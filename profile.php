@@ -50,8 +50,8 @@ if (isset($result_array)) {
     $ln = $result['LAST_NAME'];
     $e = $result['EMAIL'];
     $dob = $result['DATE_OF_BIRTH'];
-	$nrides = $result['NumRides'];
-	$nshow = $result['NoShows'];
+	  $nrides = $result['NumRides'];
+	  $nshow = $result['NoShows'];
     $p = $result['PERMISSION'];
     $ua = $result['UniversityID'];
     $n = $result['Notes'];
@@ -78,6 +78,73 @@ if($_SESSION['PERMISSION'] != 3){
 }
 function addstop(){
   var_dump($_POST);
+  echo '<br>';
+  $dbhost = "104.131.179.153";
+  $dbname = "Scheduler";
+  $dbuser = "web";
+  $dbpass = "cea";
+
+  //  Connection
+  global $db;
+
+  $db = new mysqli();
+  $db->connect($dbhost, $dbuser, $dbpass, $dbname);
+  $db->set_charset("utf8");
+
+  //  Check Connection
+  if ($db->connect_errno) {
+    printf("Connect failed: %s\n", $db->connect_error);
+    exit();
+    }
+ 
+ // $usql = 'SELECT UniversityID FROM Users WHERE '
+  $ptime = str_replace(':', '', $_POST['ptime']);
+  $ploc=$_POST['ploc'];
+
+  $ua = $_POST['uid'];
+
+  $dloc=$_POST['dloc'];
+
+  //binary date maker
+  $day = "23456";
+  if($_POST['monday'] == 1){ //not the prettiest way to do it but it works
+    $day = str_replace('2', '1', $day);
+  }else{
+    $day = str_replace('2', '0', $day);
+  }
+  if($_POST['tuesday'] == 1){
+    $day = str_replace('3', '1', $day);
+  }else{
+    $day = str_replace('3', '0', $day);
+  }
+  if($_POST['wednesday'] == 1){
+    $day = str_replace('4', '1', $day);
+  }else{
+    $day = str_replace('4', '0', $day);
+  }
+  if($_POST['thursday'] == 1){
+    $day = str_replace('5', '1', $day);
+  }else{
+    $day = str_replace('5', '0', $day);
+  }
+  if($_POST['friday'] == 1){
+    $day = str_replace('6', '1', $day);
+  }else{
+    $day = str_replace('6', '0', $day);
+  }
+  
+  
+  
+  //insert form information into database
+  $sql = 'INSERT INTO StudentTimes (UniversityID, RideTime, PickupPlace, DropPlace, Day)
+          VALUES ("'.$ua.'","'.$ptime.'","'.$ploc.'","'.$dloc.'","'.$day.'");';
+  echo($sql); 
+ 
+  $result = $db->query($sql);
+  var_dump($result);
+  if($result){
+  echo ("Added");
+  }
 }
 function deleteuser() {
 	$dbhost = "104.131.179.153";
@@ -160,6 +227,28 @@ function updateuser() {
 	}
 }
 ?>
+<head>
+   <style type="text/css">
+       html, body, #map-canvas { height: 74.75%;}
+       </style>
+
+       <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8a1UKXLfNwfqwR_nmH-yg-l35APWpeL4"></script>
+    
+      <script type="text/javascript">
+          function initialize() {
+            var mapOptions = {
+                center: { lat: 36.068681, lng: -94.176012},
+                zoom: 17
+            };
+            var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+          }
+
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+      </script>
+    </head>
+</head>
 <div id="wrapper" style="position:relative">
   <div id="left-wrapper" style="float:left;width:50%;margin-right:4%">
    <div class="panel panel-primary" style="">
@@ -243,7 +332,7 @@ function updateuser() {
        <form name="sch" method="post" class="form-signin">
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time"></span> Pickup Time</span>
-          <input type="time" class="form-control" name="ptime" aria-describedby="sizing-addon1">
+          <input type="time" class="form-control" name="ptime" aria-describedby="sizing-addon1" required>
         </div>
         <br>
         <?php
@@ -325,14 +414,16 @@ function updateuser() {
         </label>
       </div>
       <br>
+      <input type="hidden" name="uid" value='<?php echo ($ua); ?>'> 
       <center>
        <div class="btn-group btn-group-lg" role="group">
         <button type="submit" name="add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add Pickup</button>
         <button type="reset" name="clear" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Clear</button>
         </div>
       </center>
-</form>
-</div>
+    </form>
+    <div id="map-canvas"></div>
+    </div> <!-- div row -->
     </div>
   </div>
 </div>
