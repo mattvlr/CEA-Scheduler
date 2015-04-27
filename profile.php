@@ -115,16 +115,28 @@ if(isset($stop_array)){
     $mysql->connect();
     $places = $mysql->getPlaces($ua);
     $num_places = count($places);
-
+    $todays_stops = array();
+    print_r($places);
+    echo(date('N') . "<br>");
+    for($i = 0; $i < $num_places; ++$i){
+      $day = $places[$i]['Day']; 
+      $currday = date('N')-1;
+      if($day[$currday] == '1'){
+        echo($day . "<br>");
+        array_push($todays_stops,$places[$i]['PickupPlace']);
+      }
+    }
+    print_r($todays_stops);
+    $num_places = count($todays_stops);
     $lats = array($num_places);
     $lngs = array($num_places);
 
     for($i = 0; $i < $num_places; ++$i){
       $get = array('Latitude', 'Longitude');
-      $where = 'Place = "'. $places[$i]['PickupPlace'] .'"';
+      $where = 'Place = "'. $todays_stops[$i] .'"';
 
       $latlng = $mysql->selectMany('Stops',$get,$where);
-     // print_r($latlng);
+     print_r($latlng);
       $lats[$i] = $latlng[0]['Latitude'];
       $lngs[$i] = $latlng[0]['Longitude'];
       //var_dump($lats);
@@ -526,6 +538,7 @@ function updateuser() {
         </div>
       </center>
     </form>
+    <caption>Today's Schedule: </caption>
     <div id="map-canvas"></div>
     </div> <!-- div row -->
     </div>

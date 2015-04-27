@@ -373,7 +373,8 @@ class mysql_driver extends db_info
 		return false;
 	}
 	public function getPlaces($uID){
-		$what = array('PickupPlace');
+		
+		$what = array('PickupPlace','Day');
 		$where = 'UniversityID = "' . $uID . '" ORDER BY RideTime ASC';
 		$places = $this->selectMany('StudentTimes',$what,$where);
 		if($places){
