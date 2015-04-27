@@ -71,14 +71,48 @@ if (isset($result_array)) {
   }
 }
 
+$query1 = 'SELECT * FROM StudentTimes WHERE UniversityID="'.$ua.'";';
+$stop = $db->query($query1);
+ $table = '<table class="table table-striped table-condensed table-bordered"><caption>Current Scheduled Rides</caption><thread><tr class="info"><th>Ride Time</th><th>Pickup Location</th><th>Dropoff Location</th><th>Days</th></tr></thread>';
+while($stops = $stop->fetch_array()) {
+  $stop_array[] = $stops;
+}
+if(isset($stop_array)){
+  foreach($stop_array as $stop){
+    $daytemp = $stop['Day'];
+    $day = "";
+    if($daytemp[0] == 1){
+      $day = $day . "M ";
+    }
+    if($daytemp[1] == 1){
+      $day = $day . "Tu ";
+    }
+    if($daytemp[2] == 1){
+      $day = $day . "W ";
+    }
+    if($daytemp[3] == 1){
+      $day = $day . "Th ";
+    }
+    if($daytemp[4] == 1){
+      $day = $day . "F";
+    }
+    if($daytemp == "00000"){
+      $day = "None";
+    }
+    if($day == "None"){
+    $table = $table . '<tr class="danger"><td>' . $stop['RideTime'] . '</td><td>' . $stop['PickupPlace'] . '</td><td>' . $stop['DropPlace'] . '</td><td>' . $day . '</td></tr>'; 
+    }else{
+      $table = $table . '<tr><td>' . $stop['RideTime'] . '</td><td>' . $stop['PickupPlace'] . '</td><td>' . $stop['DropPlace'] . '</td><td>' . $day . '</td></tr>'; 
+    }
+  }
+}
+  $table = $table . '</table>';
 if($_SESSION['PERMISSION'] != 3){
   $r = "readonly";
 }else{
   $r ="";
 }
 function addstop(){
-  var_dump($_POST);
-  echo '<br>';
   $dbhost = "104.131.179.153";
   $dbname = "Scheduler";
   $dbuser = "web";
@@ -255,7 +289,7 @@ function updateuser() {
     <div class="panel-heading"><h3 class="panel-title">User Profile Panel</h3></div>
 
     <div class="row" style="margin-top:3%;margin-left:3%;margin-right:3%;margin-bottom:3%">
-
+     
      <form name="user" method="post" class="form-signin">
       <div class="input-group input-group-lg">
         <span class="input-group-addon" id="basic-addon1">Username</span>
@@ -329,6 +363,7 @@ function updateuser() {
     <div class="panel panel-primary" style="">
       <div class="panel-heading"><h3 class="panel-title">User Schedule Panel</h3></div>
       <div class="row" style="margin-top:3%;margin-left:3%;margin-right:3%;margin-bottom:3%">
+         <?php echo $table; ?>
        <form name="sch" method="post" class="form-signin">
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time"></span> Pickup Time</span>
@@ -418,7 +453,7 @@ function updateuser() {
       <center>
        <div class="btn-group btn-group-lg" role="group">
         <button type="submit" name="add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add Pickup</button>
-        <button type="reset" name="clear" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Clear</button>
+        <button type="reset" name="clear" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Clear Form</button>
         </div>
       </center>
     </form>
