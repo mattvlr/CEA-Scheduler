@@ -71,9 +71,9 @@ if (isset($result_array)) {
   }
 }
 //rides table
-$query1 = 'SELECT * FROM StudentTimes WHERE UniversityID="'.$ua.'";';
+$query1 = 'SELECT * FROM StudentTimes WHERE UniversityID="'.$ua.'" ORDER BY RideTime ASC;';
 $stop = $db->query($query1);
- $table = '<table class="table table-striped table-condensed table-bordered"><caption>Current Scheduled Rides</caption><thread><tr class="info"><th>Ride Time</th><th>Pickup Location</th><th>Dropoff Location</th><th>Days</th></tr></thread>';
+ $table = '<table class="table table-striped table-condensed "><caption>Current Scheduled Rides</caption><thread><tr class="info"><th>Ride Time</th><th>Pickup Location</th><th>Dropoff Location</th><th>Days</th></tr></thread>';
 while($stops = $stop->fetch_array()) {
   $stop_array[] = $stops;
 }
@@ -109,7 +109,30 @@ if(isset($stop_array)){
   $table = $table . '</table>';
 
   //end of rides table
+  //google routing info db call
+  if(($_SESSION['PERMISSION'] == 1) || ($_SESSION['PERMISSION'] == 3)){
+   
+    $mysql->connect();
+    $places = $mysql->getPlaces($ua);
+    $num_places = count($places);
 
+    $lats = array($num_places);
+    $lngs = array($num_places);
+
+    for($i = 0; $i < $num_places; ++$i){
+      $get = array('Latitude', 'Longitude');
+      $where = 'Place = "'. $places[$i]['PickupPlace'] .'"';
+
+      $latlng = $mysql->selectMany('Stops',$get,$where);
+     // print_r($latlng);
+      $lats[$i] = $latlng[0]['Latitude'];
+      $lngs[$i] = $latlng[0]['Longitude'];
+      //var_dump($lats);
+     // echo("<br>");
+    }
+
+  }
+  
 if($_SESSION['PERMISSION'] != 3){
   $r = "readonly";
 }else{
@@ -274,8 +297,13 @@ function updateuser() {
       <script type="text/javascript">
       var directionsDisplay;
       var directionsService = new google.maps.DirectionsService();
-      var c1 = new google.maps.LatLng(36.069141, -94.1756620); // still testing this
-      var c2 = new google.maps.LatLng(36.069960, -94.1721320);
+
+
+      var stopsCount = <?php echo json_encode($num_places); ?>;
+      var lngs = <?php echo json_encode($lngs); ?>;
+      var lats = <?php echo json_encode($lats); ?>;
+      var places = <?php echo json_encode($places); ?>;
+     // alert(lngs[0]);
           function initialize() {
              directionsDisplay = new google.maps.DirectionsRenderer();
             var mapOptions = {
@@ -287,9 +315,24 @@ function updateuser() {
           }
           function calcRoute() {
             var selectedMode = "WALKING";
+            if(stopsCount > 1){
+             // alert(lats[stopsCount-1]);
+              var o = new google.maps.LatLng(lats[0],lngs[0]);
+              var e = new google.maps.LatLng(lats[stopsCount-1],lngs[stopsCount-1]);
+              var waypnts = [];
+              for(var i = 1; i < stopsCount - 1; i++){
+                var temp = new google.maps.LatLng(lats[i],lngs[i]);
+                waypnts.push({
+                  location: temp,
+                  stopover: true});
+                }
+              
+
+            
             var request = {
-                origin: c1,
-                destination: c2,
+                origin: o,
+                destination: e,
+                waypoints: waypnts,
                 // Note that Javascript allows us to access the constant
                 // using square brackets and a string value as its
                 // "property."
@@ -300,6 +343,7 @@ function updateuser() {
                 directionsDisplay.setDirections(response);
               }
             });
+          }
           }
 
 
@@ -478,7 +522,7 @@ function updateuser() {
       <center>
        <div class="btn-group btn-group-lg" role="group">
         <button type="submit" name="add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add Pickup</button>
-        <button type="reset" name="clear" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Clear Form</button>
+        <button type="reset" name="clear" class="btn btn-default" role="button"><span class="glyphicon glyphicon-refresh"></span> Clear Form</button>
         </div>
       </center>
     </form>
