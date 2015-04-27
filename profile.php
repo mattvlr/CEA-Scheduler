@@ -6,6 +6,8 @@ if(isset($_POST)){
     deleteuser();
   }elseif(isset($_POST['update'])){
     updateuser();
+  }elseif(isset($_POST['add'])){
+    addstop();
   }
 }
 if(isset($_GET['u'])){
@@ -14,6 +16,7 @@ if(isset($_GET['u'])){
   $u = $_SESSION['USERNAME'];
   $p = $_SESSION['PERMISSION'];
 }
+
 
 
 $dbhost = "104.131.179.153";
@@ -73,7 +76,9 @@ if($_SESSION['PERMISSION'] != 3){
 }else{
   $r ="";
 }
-
+function addstop(){
+  var_dump($_POST);
+}
 function deleteuser() {
 	$dbhost = "104.131.179.153";
 	$dbname = "Scheduler";
@@ -221,7 +226,7 @@ function updateuser() {
         echo '<center>
         <div class="btn-group btn-group-lg" role="group">
 		<button type="submit" name="update" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Update User</button>
-		<button type="submit" name="delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Remove User</button>
+		<button type="submit" name="delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove User</button>
         </div>
         </center>';}
         ?>
@@ -234,7 +239,100 @@ function updateuser() {
   <div id="right-wrapper" style="float:right;width:43%;margin-right:3%;">
     <div class="panel panel-primary" style="">
       <div class="panel-heading"><h3 class="panel-title">User Schedule Panel</h3></div>
-      Schedule Generator stuff goes here or a link to it.
+      <div class="row" style="margin-top:3%;margin-left:3%;margin-right:3%;margin-bottom:3%">
+       <form name="sch" method="post" class="form-signin">
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time"></span> Pickup Time</span>
+          <input type="time" class="form-control" name="ptime" aria-describedby="sizing-addon1">
+        </div>
+        <br>
+        <?php
+        $host = "104.131.179.153";
+      $username="web"; // Mysql username
+      $password="cea"; // Mysql password
+      $db_name="Scheduler"; // Database name
+      $tbl_name="Stops"; // Table name
+
+      // Connect to server and select database.
+      $conn = mysql_connect($host, $username, $password)or die("cannot connect");
+      mysql_select_db("Scheduler")or die("cannot select DB");
+
+      $sql = "SELECT * FROM Stops GROUP BY FullName";
+
+      $result = mysql_query($sql, $conn);
+      if ($result) {
+        echo  '<label for="sel2">Pickup Location</label>
+        <select id="sel2" class="form-control input-lg" name="ploc">';
+
+        $num_results = mysql_num_rows($result);
+        for ($i=0;$i<$num_results;$i++) {
+          $row = mysql_fetch_array($result);
+          $name = $row['FullName'];
+          $place = $row['Place'];
+          echo '<option value="' .$place. '">' .$name. '</option>';
+        }
+
+        echo '</select>';
+      }
+      ?>
+      <br>
+      <?php
+        $host = "104.131.179.153";
+      $username="web"; // Mysql username
+      $password="cea"; // Mysql password
+      $db_name="Scheduler"; // Database name
+      $tbl_name="Stops"; // Table name
+
+      // Connect to server and select database.
+      $conn = mysql_connect($host, $username, $password)or die("cannot connect");
+      mysql_select_db("Scheduler")or die("cannot select DB");
+
+      $sql = "SELECT * FROM Stops GROUP BY FullName";
+
+      $result = mysql_query($sql, $conn);
+      if ($result) {
+        echo  '<label for="sel2">Dropoff Location</label>
+        <select id="sel2" class="form-control input-lg" name="dloc">';
+
+        $num_results = mysql_num_rows($result);
+        for ($i=0;$i<$num_results;$i++) {
+          $row = mysql_fetch_array($result);
+          $name = $row['FullName'];
+          $place = $row['Place'];
+          echo '<option value="' .$place. '">' .$name. '</option>';
+        }
+
+        echo '</select>';
+      }
+      ?>
+      <br>
+      <label for="days">Days to be picked up</label>
+      <div id="days" class="input-group input-group-lg">
+        <label class="checkbox-inline">
+          <input type="checkbox" name="monday" value="1"> Monday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="tuesday" value="1"> Tuesday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="wednesday" value="1"> Wednesday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="thursday" value="1"> Thursday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="friday" value="1"> Friday
+        </label>
+      </div>
+      <br>
+      <center>
+       <div class="btn-group btn-group-lg" role="group">
+        <button type="submit" name="add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add Pickup</button>
+        <button type="reset" name="clear" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Clear</button>
+        </div>
+      </center>
+</form>
+</div>
     </div>
   </div>
 </div>
