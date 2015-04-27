@@ -70,7 +70,7 @@ if (isset($result_array)) {
 
   }
 }
-
+//rides table
 $query1 = 'SELECT * FROM StudentTimes WHERE UniversityID="'.$ua.'";';
 $stop = $db->query($query1);
  $table = '<table class="table table-striped table-condensed table-bordered"><caption>Current Scheduled Rides</caption><thread><tr class="info"><th>Ride Time</th><th>Pickup Location</th><th>Dropoff Location</th><th>Days</th></tr></thread>';
@@ -100,13 +100,16 @@ if(isset($stop_array)){
       $day = "None";
     }
     if($day == "None"){
-    $table = $table . '<tr class="danger"><td>' . $stop['RideTime'] . '</td><td>' . $stop['PickupPlace'] . '</td><td>' . $stop['DropPlace'] . '</td><td>' . $day . '</td></tr>'; 
+    $table = $table . '<tr class="danger"><td>' . $stop['RideTime'] . '</td><td>' . $stop['PickupPlace'] . '</td><td>' . $stop['DropPlace'] . '</td><td><b>' . $day . '</b></td></tr>'; 
     }else{
       $table = $table . '<tr><td>' . $stop['RideTime'] . '</td><td>' . $stop['PickupPlace'] . '</td><td>' . $stop['DropPlace'] . '</td><td>' . $day . '</td></tr>'; 
     }
   }
 }
   $table = $table . '</table>';
+
+  //end of rides table
+
 if($_SESSION['PERMISSION'] != 3){
   $r = "readonly";
 }else{
@@ -269,13 +272,34 @@ function updateuser() {
        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA8a1UKXLfNwfqwR_nmH-yg-l35APWpeL4"></script>
     
       <script type="text/javascript">
+      var directionsDisplay;
+      var directionsService = new google.maps.DirectionsService();
+      var c1 = new google.maps.LatLng(36.069141, -94.1756620); // still testing this
+      var c2 = new google.maps.LatLng(36.069960, -94.1721320);
           function initialize() {
+             directionsDisplay = new google.maps.DirectionsRenderer();
             var mapOptions = {
                 center: { lat: 36.068681, lng: -94.176012},
                 zoom: 17
             };
             var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
+            directionsDisplay.setMap(map);
+          }
+          function calcRoute() {
+            var selectedMode = "WALKING";
+            var request = {
+                origin: c1,
+                destination: c2,
+                // Note that Javascript allows us to access the constant
+                // using square brackets and a string value as its
+                // "property."
+                travelMode: google.maps.TravelMode[selectedMode]
+            };
+            directionsService.route(request, function(response, status) {
+              if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+              }
+            });
           }
 
 
@@ -283,6 +307,7 @@ function updateuser() {
       </script>
     </head>
 </head>
+<body  onload="calcRoute()">
 <div id="wrapper" style="position:relative">
   <div id="left-wrapper" style="float:left;width:50%;margin-right:4%">
    <div class="panel panel-primary" style="">
@@ -462,6 +487,7 @@ function updateuser() {
     </div>
   </div>
 </div>
+</body>
 
 
 
