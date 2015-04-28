@@ -444,14 +444,17 @@ function updateuser() {
     <div class="panel panel-primary" style="">
       <div class="panel-heading"><h3 class="panel-title">User Schedule Panel</h3></div>
       <div class="row" style="margin-top:3%;margin-left:3%;margin-right:3%;margin-bottom:3%">
-         <?php echo $table; ?>
+         <?php echo $table; 
+         if($_SESSION['PERMISSION'] == 3){
+          echo '
        <form name="sch" method="post" class="form-signin">
         <div class="input-group input-group-lg">
           <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time"></span> Pickup Time</span>
           <input type="time" class="form-control" name="ptime" aria-describedby="sizing-addon1" required>
         </div>
-        <br>
-        <?php
+        <br>';
+        
+
         $host = "104.131.179.153";
       $username="web"; // Mysql username
       $password="cea"; // Mysql password
@@ -479,9 +482,11 @@ function updateuser() {
 
         echo '</select>';
       }
+    }
       ?>
       <br>
       <?php
+      if($_SESSION['PERMISSION'] == 3){
         $host = "104.131.179.153";
       $username="web"; // Mysql username
       $password="cea"; // Mysql password
@@ -509,7 +514,9 @@ function updateuser() {
 
         echo '</select>';
       }
-      ?>
+      
+      
+      echo '
       <br>
       <label for="days">Days to be picked up</label>
       <div id="days" class="input-group input-group-lg">
@@ -530,14 +537,16 @@ function updateuser() {
         </label>
       </div>
       <br>
-      <input type="hidden" name="uid" value='<?php echo ($ua); ?>'> 
+      <input type="hidden" name="uid" value='.$ua.'); > 
       <center>
        <div class="btn-group btn-group-lg" role="group">
         <button type="submit" name="add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add Pickup</button>
         <button type="reset" name="clear" class="btn btn-default" role="button"><span class="glyphicon glyphicon-refresh"></span> Clear Form</button>
         </div>
       </center>
-    </form>
+    </form>';
+  }
+    ?>
     <caption>Today's Schedule: </caption>
     <div id="map-canvas"></div>
     </div> <!-- div row -->
