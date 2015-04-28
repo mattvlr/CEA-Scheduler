@@ -9,8 +9,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
 
-import com.mysql.jdbc.PreparedStatement;
-
 public class Main {
 
     public static void main(String[] args) {   	        
@@ -56,40 +54,11 @@ public class Main {
 				if(stopsToAdd.contains(rs.getString("Place"))){
 					stops.add(new Stop(rs.getString("Place"), rs.getFloat("Latitude"), rs.getFloat("Longitude")));
 				}
-			}
-			
-			QuickSort sorter = new QuickSort(times);
-			sorter.sort();
-			
-			//insert
-		   	for(StudentTime sT : times){
-		   		// create a sql date object so we can use it in our INSERT statement
-		   		Calendar calendar = Calendar.getInstance();
-	        	java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-	   
-	        	// the mysql insert statement
-	        	String query = " insert into Schedules (Driver_ID, Day, Cart, Student_First, StudentLast, Driver, PickupTime, DropTime, PickupPoint, DropPoint, BackupDriver)"
-	        		+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-	   
-	        	// create the mysql insert preparedstatement
-	        	PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
-	        	preparedStmt.setInt 	(1, 1);
-	        	preparedStmt.setDate   	(2, startDate);
-	        	preparedStmt.setString	(3, "Cart Name");
-	        	preparedStmt.setString	(4, getStudentName(conn, true, sT.getUniversityID()));
-	        	preparedStmt.setString	(5, getStudentName(conn, false, sT.getUniversityID()));
-	        	preparedStmt.setString	(6, "Driver Name");
-	        	preparedStmt.setString  (7, "" + sT.getRideTime());
-	        	preparedStmt.setString  (8, "Drop Time");
-	        	preparedStmt.setString  (9, sT.getPickupPlace());
-	        	preparedStmt.setString  (10, sT.getDropPlace());
-	        	preparedStmt.setString  (11, "BckDriverName");
-	        
-	        	// execute the preparedstatement
-	        	preparedStmt.execute();
-	         
-		   	}
+			} 
 			//end db shit
+			
+			//System.out.println("dist: " + stops.get(0).getDistance(stops.get(1)) + "miles");
+			
 			conn.close(); 
 			System.out.println("connection terminated");
 		} 
@@ -124,28 +93,18 @@ public class Main {
      	return !stops.contains(stop);
     }
     
-    private static String getStudentName(Connection conn, boolean isFirst, int id){
-    	try {
-    		String name = "";
-        	Statement st = conn.createStatement();
-			String sql = ("SELECT * FROM Users WHERE UniversityID =" + id + ";");
-			ResultSet rs = st.executeQuery(sql);
-			while(rs.next()) { 
-				if(isFirst){
-					name = rs.getString("First_Name");
-				}
-				else{
-					name = rs.getString("Last_Name");
-				}
-				break;
-			}
-			return name;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+    private static boolean checkTime(int rideTime){
+		Calendar cal = Calendar.getInstance();
+    	cal.getTime();
+    	SimpleDateFormat sdf = new SimpleDateFormat("HHmm");
+		int currentTime = 0;
+		try{
+			currentTime = Integer.parseInt(sdf.format(cal.getTime()));
+			//return currentTime - rideTime < 
+			return false;
 		}
-		
-    	
-    	return "";
+		catch(Exception e){
+			return false;
+		}
     }
 }

@@ -1,0 +1,18 @@
+
+public class StudentTime {
+
+	int universityID;
+	int rideTime;
+	String pickupPlace;
+	String dropPlace;
+	String day;
+	
+	public StudentTime(int universityID, int rideTime, String pickupPlace, String dropPlace){
+		this.universityID = universityID;
+		this.rideTime = rideTime;
+		this.pickupPlace = pickupPlace;
+		this.dropPlace = dropPlace;
+		//this.day = day;
+	}
+
+}

@@ -1,0 +1,84 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
+
+public class Main {
+
+    public static void main(String[] args) {   	        
+		String url = "jdbc:mysql://104.131.179.153:3306/"; 
+		String dbName = "Scheduler";
+		String driver = "com.mysql.jdbc.Driver";
+		String userName = "web"; 
+		String password = "cea"; 
+		
+		ArrayList<Stop> stops = new ArrayList<Stop>();
+		ArrayList<StudentTime> times = new ArrayList<StudentTime>();
+		
+		try { 
+			Class.forName(driver).newInstance();
+			Connection conn = DriverManager.getConnection(url+dbName,userName,password);
+			System.out.println("connection successful");
+			
+			//start db shit
+			Statement st = conn.createStatement();
+			String sql = ("SELECT * FROM StudentTimes;");
+			ResultSet rs = st.executeQuery(sql);
+			while(rs.next()) { 
+				if(checkDay(rs.getString("Day"))){
+					times.add(new StudentTime(rs.getInt("UniversityID"), rs.getInt("RideTime"), rs.getString("PickupPlace"), rs.getString("DropPlace")));
+				}
+			} 
+			
+			st = conn.createStatement();
+			sql = ("SELECT * FROM Stops;");
+			rs = st.executeQuery(sql);
+			while(rs.next()) {
+				System.out.println(rs.getInt("ID"));
+				if(rs.getInt("ID") == 4 || rs.getInt("ID") == 8){
+					stops.add(new Stop(rs.getString("Place"), rs.getDouble("Latitude"), rs.getDouble("Longitude")));
+				}
+			} 
+			//end db shit
+			
+			//System.out.println("dist: " + stops.get(0).getDistance(stops.get(1)) + "miles");
+			
+			conn.close(); 
+			System.out.println("connection terminated");
+		} 
+		catch (Exception e) { 
+			e.printStackTrace(); 
+		}
+	}
+    
+    private static boolean checkDay(String dbDays){
+    	Date yourDate = new Date();
+    	Calendar c = Calendar.getInstance();
+    	c.setTime(yourDate);
+    	int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
+    	
+    	switch(dayOfWeek){
+    	case 2:
+    		return(dbDays.charAt(0) == '1');
+    	case 3:
+    		return(dbDays.charAt(1) == '1');
+    	case 4:
+    		return(dbDays.charAt(2) == '1');
+    	case 5:
+    		return(dbDays.charAt(3) == '1');
+    	case 6:
+    		return(dbDays.charAt(4) == '1');
+    	}
+    	    	
+    	return false;
+    }
+
+    private static void addStop(String stop, ArrayList<Stop> stops, ArrayList<StudentTime> times){
+    	
+    }
+}

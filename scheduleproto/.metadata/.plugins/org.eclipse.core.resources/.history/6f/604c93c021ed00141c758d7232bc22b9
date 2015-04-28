@@ -83,7 +83,7 @@ public class Main {
 	        	preparedStmt.setString  (8, "Drop Time");
 	        	preparedStmt.setString  (9, sT.getPickupPlace());
 	        	preparedStmt.setString  (10, sT.getDropPlace());
-	        	preparedStmt.setString  (11, "BckDriverName");
+	        	preparedStmt.setString  (11, "Backup Driver Name");
 	        
 	        	// execute the preparedstatement
 	        	preparedStmt.execute();

@@ -79,11 +79,11 @@ public class Main {
 	        	preparedStmt.setString	(4, getStudentName(conn, true, sT.getUniversityID()));
 	        	preparedStmt.setString	(5, getStudentName(conn, false, sT.getUniversityID()));
 	        	preparedStmt.setString	(6, "Driver Name");
-	        	preparedStmt.setString  (7, "" + sT.getRideTime());
+	        	preparedStmt.setString  (7, sT.getRideTime());
 	        	preparedStmt.setString  (8, "Drop Time");
 	        	preparedStmt.setString  (9, sT.getPickupPlace());
 	        	preparedStmt.setString  (10, sT.getDropPlace());
-	        	preparedStmt.setString  (11, "BckDriverName");
+	        	preparedStmt.setString  (11, "Backup Driver Name");
 	        
 	        	// execute the preparedstatement
 	        	preparedStmt.execute();
