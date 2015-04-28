@@ -107,6 +107,43 @@ if(isset($stop_array)){
   }
 }
   $table = $table . '</table>';
+//driver table
+$query2 = 'SELECT * FROM DriverTimes WHERE UniversityID="'.$ua.'" ORDER BY StartTime ASC;';
+$stop = $db->query($query2);
+$dtable = '<table class="table table-striped table-condensed "><caption>Current Scheduled Shifts</caption><thread><tr class="info"><th>Start Time</th><th>End Time</th><th>Days</th></tr></thread>';
+while($stops = $stop->fetch_array()) {
+  $stop_array[] = $stops;
+}
+if(isset($stop_array)){
+  foreach($stop_array as $stop){
+    $daytemp = $stop['DaysOfWeek'];
+    $day = "";
+    if($daytemp[0] == 1){
+      $day = $day . "M ";
+    }
+    if($daytemp[1] == 1){
+      $day = $day . "Tu ";
+    }
+    if($daytemp[2] == 1){
+      $day = $day . "W ";
+    }
+    if($daytemp[3] == 1){
+      $day = $day . "Th ";
+    }
+    if($daytemp[4] == 1){
+      $day = $day . "F";
+    }
+    if($daytemp == "00000"){
+      $day = "None";
+    }
+    if($day == "None"){
+    $dtable = $dtable . '<tr class="danger"><td>' . $stop['StartTime'] . '</td><td>' . $stop['EndTime'] . '</td><td><b>' . $day . '</b></td></tr>'; 
+    }else{
+      $dtable = $dtable . '<tr><td>' . $stop['StartTime'] . '</td><td>' . $stop['EndTime'] . '</td><td>' . $day . '</td></tr>'; 
+    }
+  }
+}
+  $dtable = $dtable . '</table>';
 
   //end of rides table
   //google routing info db call
@@ -151,6 +188,7 @@ if($_SESSION['PERMISSION'] != 3){
   $r ="";
 }
 function addstop(){
+ // print_r($_POST);
   $dbhost = "104.131.179.153";
   $dbname = "Scheduler";
   $dbuser = "web";
@@ -210,12 +248,12 @@ function addstop(){
   //insert form information into database
   $sql = 'INSERT INTO StudentTimes (UniversityID, RideTime, PickupPlace, DropPlace, Day)
           VALUES ("'.$ua.'","'.$ptime.'","'.$ploc.'","'.$dloc.'","'.$day.'");';
-  echo($sql); 
+  //echo($sql); 
  
   $result = $db->query($sql);
-  var_dump($result);
+  //var_dump($result);
   if($result){
-  echo ("Added");
+  //echo ("Added");
   }
 }
 function deleteuser() {
@@ -445,6 +483,42 @@ function updateuser() {
       <div class="panel-heading"><h3 class="panel-title">User Schedule Panel</h3></div>
       <div class="row" style="margin-top:3%;margin-left:3%;margin-right:3%;margin-bottom:3%">
          <?php if($_SESSION['PERMISSION'] !=2){echo $table;} 
+         /*elseif(($p == 2) && ($_SESSION['PERMISSION'] == 3)){
+          echo $dtable;
+          echo '
+          <form name="driver" method="post" class="form-signin">
+          <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time"></span> Shift Start Time</span>
+          <input type="time" class="form-control" name="stime" aria-describedby="sizing-addon1" required>
+        </div>
+        <br>
+        <div class="input-group input-group-lg">
+          <span class="input-group-addon" id="basic-addon1"><span class="glyphicon glyphicon-time"></span> Shift End Time</span>
+          <input type="time" class="form-control" name="etime" aria-describedby="sizing-addon1" required>
+        </div>
+        <br>
+      <label for="days">Days to work</label>
+      <div id="days" class="input-group input-group-lg">
+        <label class="checkbox-inline">
+          <input type="checkbox" name="monday" value="1"> Monday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="tuesday" value="1"> Tuesday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="wednesday" value="1"> Wednesday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="thursday" value="1"> Thursday
+        </label>
+        <label class="checkbox-inline">
+          <input type="checkbox" name="friday" value="1"> Friday
+        </label>
+        </form>';
+         }*/
+         if($_SESSION['PERMISSION'] == 2){
+          echo $dtable;
+         }
          if($_SESSION['PERMISSION'] == 3){
           echo '
        <form name="sch" method="post" class="form-signin">
@@ -537,7 +611,7 @@ function updateuser() {
         </label>
       </div>
       <br>
-      <input type="hidden" name="uid" value='.$ua.'); > 
+      <input type="hidden" name="uid" value="'.$ua.'"> 
       <center>
        <div class="btn-group btn-group-lg" role="group">
         <button type="submit" name="add" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add Pickup</button>

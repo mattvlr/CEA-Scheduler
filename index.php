@@ -42,6 +42,9 @@
 					if($_GET['act'] == 'ul'){
 						$body = require("userlist.php");
 					}
+					if($_GET['act'] == 'sch'){
+						$body = require("schedule.php");
+					}
 	
 				}
 				if(isset($_GET['loc'])){

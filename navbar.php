@@ -42,7 +42,7 @@ if($_SESSION['PERMISSION'] == 2) // driver
 
                  <li style="padding: 3px 20px">'.$permission.'</li>
                  <li class="divider"></li>
-                 <li><a href="#">Schedule</a></li>
+                 <li><a href="?act=sch">Schedule</a></li>
                  <li class="divider"></li>
                  <li><a href="?act=profile">Profile</a></li>
                  <li><a href="#">Driver Statistics</a></li>
@@ -63,7 +63,7 @@ if($_SESSION['PERMISSION'] == 1) // student
 
                  <li style="padding: 3px 20px">'.$permission.'</li>
                  <li class="divider"></li>
-                 <li><a href="#">Schedule</a></li>
+                 <li><a href="?act=sch">Schedule</a></li>
                  <li class="divider"></li>
                  <li><a href="?act=profile">Profile</a></li>
                  <li><a href="?act=logout"">Logout</a></li>
@@ -84,7 +84,7 @@ if($_SESSION['PERMISSION'] == 3) // admin
                  <li style="padding: 3px 20px">'.$permission.'</li>
                  <li class="divider"></li>
                  <li><a href="?act=admin">Settings Panel</a></li>
-                 <li><a href="#">Schedule</a></li>
+                 <li><a href="?act=sch">Schedule</a></li>
                  <li class="divider"></li>
                  <li><a href="?act=profile">Profile</a></li>
                  <li><a href="#">Statistics</a></li>
