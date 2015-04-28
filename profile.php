@@ -116,17 +116,17 @@ if(isset($stop_array)){
     $places = $mysql->getPlaces($ua);
     $num_places = count($places);
     $todays_stops = array();
-    print_r($places);
-    echo(date('N') . "<br>");
+   // print_r($places);
+   // echo(date('N') . "<br>");
     for($i = 0; $i < $num_places; ++$i){
       $day = $places[$i]['Day']; 
       $currday = date('N')-1;
       if($day[$currday] == '1'){
-        echo($day . "<br>");
+       // echo($day . "<br>");
         array_push($todays_stops,$places[$i]['PickupPlace']);
       }
     }
-    print_r($todays_stops);
+   // print_r($todays_stops);
     $num_places = count($todays_stops);
     $lats = array($num_places);
     $lngs = array($num_places);
@@ -136,7 +136,7 @@ if(isset($stop_array)){
       $where = 'Place = "'. $todays_stops[$i] .'"';
 
       $latlng = $mysql->selectMany('Stops',$get,$where);
-     print_r($latlng);
+     //print_r($latlng);
       $lats[$i] = $latlng[0]['Latitude'];
       $lngs[$i] = $latlng[0]['Longitude'];
       //var_dump($lats);
@@ -238,11 +238,11 @@ function deleteuser() {
 		}
     //delete information into database
 	$usrname = $_POST['username'];
-	echo $usrname;
+	//echo $usrname;
 	$sql='DELETE from Users WHERE USERNAME = "'. $usrname.'"';
-	echo($sql);
+	//echo($sql);
 	$result = $db->query($sql);
-	var_dump($result);
+	//var_dump($result);
 	//if($result){
 	// Register delete location and redirect to file 
 	//header("Location: index.php?loc=uS");}
@@ -290,12 +290,12 @@ function updateuser() {
 	//insert form information into database
 	$sql3='UPDATE Users SET FIRST_NAME = "' .$firstname. '", LAST_NAME = "'.$lastname. '", EMAIL = "' . $email. '", DATE_OF_BIRTH = "' .$birth. '", PERMISSION= "' .$permission. '", Notes ="' .$notes. '", UniversityID ="' .$uid. '" WHERE USERNAME = "' .$uname. '"';
 
-	echo($sql3); 
+	//echo($sql3); 
 	
 	$result3 = $db->query($sql3);
-	var_dump($result3);
+	//var_dump($result3);
 	if($result3){
-	echo ("Updated");
+	//echo ("Updated");
 	}
 }
 ?>

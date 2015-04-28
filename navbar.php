@@ -1,4 +1,21 @@
 <?php 
+//check for Demo
+//print_r($_SESSION);
+if($_SESSION['USERNAME'] == "demo"){
+  $demo_select = '
+  <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1" style="margin-right:1%">
+        <form name="user" method="post" style="" class="navbar-form ">
+       Demo Permission
+        <select name="perm" class="form-control" id="sel1">
+        <option '. $sel2 .' value="1">Student</option>
+        <option '. $sel3 .' value="2">Driver</option>
+        <option '. $sel4 .' value="3">Admin</option>
+        </select>
+          <button type="submit" name="update" class="btn btn-small" role="button"><span class="glyphicon glyphicon-floppy-disk"></span></button></form></div>';
+}
+if(isset($_POST['perm'])){
+  $_SESSION['PERMISSION'] = $_POST['perm'];
+}
 //Check for sessions
 if(isset($_SESSION['USERNAME']))
 {
@@ -101,7 +118,7 @@ $navbar = '
   <div class="navbar navbar-default navbar-fixed-top">
         <div class="navbar-header">
          <a href="http://www.uark.edu"> <img src="/resources/img/logo-on-red.png" style="position:absolute; padding-left:35px; left:-5px;"/>
-        </a></div>
+        </a></div> '.$demo_select.'
           ' . $nav_pages . '
     </div>';
 
