@@ -444,7 +444,7 @@ function updateuser() {
     <div class="panel panel-primary" style="">
       <div class="panel-heading"><h3 class="panel-title">User Schedule Panel</h3></div>
       <div class="row" style="margin-top:3%;margin-left:3%;margin-right:3%;margin-bottom:3%">
-         <?php echo $table; 
+         <?php if($_SESSION['PERMISSION'] !=2){echo $table;} 
          if($_SESSION['PERMISSION'] == 3){
           echo '
        <form name="sch" method="post" class="form-signin">
@@ -547,8 +547,11 @@ function updateuser() {
     </form>';
   }
     ?>
-    <caption>Today's Schedule: </caption>
+    <?php if($_SESSION['PERMISSION'] != 2){
+      echo '
+    <caption>Today&#39s Schedule: </caption>
     <div id="map-canvas"></div>
+    ';}?>
     </div> <!-- div row -->
     </div>
   </div>
