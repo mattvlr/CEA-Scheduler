@@ -71,6 +71,7 @@ if (isset($result_array)) {
   }
 }
 //rides table
+if(($_SESSION['PERMISSION'] == 1) || ($_SESSION['PERMISSION'] == 3)){
 $query1 = 'SELECT * FROM StudentTimes WHERE UniversityID="'.$ua.'" ORDER BY RideTime ASC;';
 $stop = $db->query($query1);
  $table = '<table class="table table-striped table-condensed "><caption>Current Scheduled Rides</caption><thread><tr class="info"><th>Ride Time</th><th>Pickup Location</th><th>Dropoff Location</th><th>Days</th></tr></thread>';
@@ -106,9 +107,13 @@ if(isset($stop_array)){
     }
   }
 }
+
   $table = $table . '</table>';
+}
+if($_SESSION['PERMISSION'] == 2){
 //driver table
 $query2 = 'SELECT * FROM DriverTimes WHERE UniversityID="'.$ua.'" ORDER BY StartTime ASC;';
+echo $query2 . " " . "<br>";
 $stop = $db->query($query2);
 $dtable = '<table class="table table-striped table-condensed "><caption>Current Scheduled Shifts</caption><thread><tr class="info"><th>Start Time</th><th>End Time</th><th>Days</th></tr></thread>';
 while($stops = $stop->fetch_array()) {
@@ -116,6 +121,8 @@ while($stops = $stop->fetch_array()) {
 }
 if(isset($stop_array)){
   foreach($stop_array as $stop){
+    print_r($stop);
+    echo "<br>";
     $daytemp = $stop['DaysOfWeek'];
     $day = "";
     if($daytemp[0] == 1){
@@ -146,6 +153,7 @@ if(isset($stop_array)){
   $dtable = $dtable . '</table>';
 
   //end of rides table
+}
   //google routing info db call
   if(($_SESSION['PERMISSION'] == 1) || ($_SESSION['PERMISSION'] == 3)){
    
