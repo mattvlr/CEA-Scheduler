@@ -113,7 +113,7 @@ if(isset($stop_array)){
 if($_SESSION['PERMISSION'] == 2){
 //driver table
 $query2 = 'SELECT * FROM DriverTimes WHERE UniversityID="'.$ua.'" ORDER BY StartTime ASC;';
-echo $query2 . " " . "<br>";
+//echo $query2 . " " . "<br>";
 $stop = $db->query($query2);
 $dtable = '<table class="table table-striped table-condensed "><caption>Current Scheduled Shifts</caption><thread><tr class="info"><th>Start Time</th><th>End Time</th><th>Days</th></tr></thread>';
 while($stops = $stop->fetch_array()) {
@@ -121,8 +121,8 @@ while($stops = $stop->fetch_array()) {
 }
 if(isset($stop_array)){
   foreach($stop_array as $stop){
-    print_r($stop);
-    echo "<br>";
+  //  print_r($stop);
+    //echo "<br>";
     $daytemp = $stop['DaysOfWeek'];
     $day = "";
     if($daytemp[0] == 1){
