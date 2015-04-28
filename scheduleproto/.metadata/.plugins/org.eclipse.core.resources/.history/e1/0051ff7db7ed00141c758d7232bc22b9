@@ -79,9 +79,7 @@ public class Main {
 		   		// create a sql date object so we can use it in our INSERT statement
 		   		Calendar calendar = Calendar.getInstance();
 	        	java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-	        	String primaryDriver = selectDriver(drivers, sT.getRideTime(), 2);
-	        	String secondaryDriver = (selectDriver(drivers, sT.getRideTime(), 1) == primaryDriver) ? "No Backup" : selectDriver(drivers, sT.getRideTime(), 1);
-	        	
+	   
 	        	// the mysql insert statement
 	        	String query = " insert into Schedules (Driver_ID, Day, Cart, Student_First, StudentLast, Driver, PickupTime, DropTime, PickupPoint, DropPoint, BackupDriver)"
 	        		+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -90,15 +88,15 @@ public class Main {
 	        	PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 	        	preparedStmt.setInt 	(1, 1);
 	        	preparedStmt.setDate   	(2, startDate);
-	        	preparedStmt.setString	(3, "Ol' Reliable");
+	        	preparedStmt.setString	(3, "Cart Name");
 	        	preparedStmt.setString	(4, getStudentName(conn, true, sT.getUniversityID()));
 	        	preparedStmt.setString	(5, getStudentName(conn, false, sT.getUniversityID()));
-	        	preparedStmt.setString	(6, primaryDriver);
+	        	preparedStmt.setString	(6, selectDriver(drivers, sT.getRideTime(), 2));
 	        	preparedStmt.setString  (7, "" + sT.getRideTime());
 	        	preparedStmt.setString  (8, "Drop Time");
 	        	preparedStmt.setString  (9, sT.getPickupPlace());
 	        	preparedStmt.setString  (10, sT.getDropPlace());
-	        	preparedStmt.setString  (11, secondaryDriver);
+	        	preparedStmt.setString  (11, selectDriver(drivers, sT.getRideTime(), 1));
 	        
 	        	// execute the preparedstatement
 	        	preparedStmt.execute();

@@ -90,7 +90,7 @@ public class Main {
 	        	PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 	        	preparedStmt.setInt 	(1, 1);
 	        	preparedStmt.setDate   	(2, startDate);
-	        	preparedStmt.setString	(3, "Ol' Reliable");
+	        	preparedStmt.setString	(3, "Cart Name");
 	        	preparedStmt.setString	(4, getStudentName(conn, true, sT.getUniversityID()));
 	        	preparedStmt.setString	(5, getStudentName(conn, false, sT.getUniversityID()));
 	        	preparedStmt.setString	(6, primaryDriver);

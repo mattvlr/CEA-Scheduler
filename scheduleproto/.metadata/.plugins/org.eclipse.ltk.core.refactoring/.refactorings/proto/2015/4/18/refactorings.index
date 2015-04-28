@@ -2,3 +2,7 @@
 1430155255274	Encapsulate field 'dropPlace'
 1430155796522	Encapsulate field 'rideTime'
 1430168869280	Encapsulate field 'universityID'
+1430231730375	Encapsulate field 'name'
+1430231734898	Encapsulate field 'startTime'
+1430231739808	Encapsulate field 'endTime'
+1430231802199	Encapsulate field 'timesDriving'
