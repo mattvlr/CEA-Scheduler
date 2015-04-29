@@ -20,13 +20,6 @@
 
   <div class="panel-heading"><h3 class="panel-title">Users Panel</h3></div>
   <div class="panel-body"> <div class="row"  style="padding:5px 5px 5px 5px;">
-    <div class="media">
-      <div class="media-body">   <center><div class="well" style="float:left;">Clicking on a user that shows up in the search will take you to their profile where you can edit their information. The two other buttons
-       let you add and remove users.</div>
-  <div class="btn-group btn-group-lg" role="group" aria-label="Large button group"  style="padding:5px 5px 5px 5px">
-        <a href="?user=new" class="btn btn-default" role="button"><span class="glyphicon glyphicon-plus"></span> Add </a>
-        <a href="?user=delete" class="btn btn-default" role="button"><span class="glyphicon glyphicon-minus"></span> Remove </a></div></center>
-    </div></center></div></div>
     <div class="input-group input-group-lg"  style="padding:5px 5px 5px 5px">
       <span class="input-group-addon" id="sizing-addon1"><span class="glyphicon glyphicon-user"></span> User Search</span>
       <input type="text" id="search" class="form-control" placeholder="Search for...">
