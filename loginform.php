@@ -96,7 +96,7 @@ $form = '<div id="main-container" role="main">
                         <br>
                         <br>
                         <button class="btn btn-primary btn-lg" type="submit" value="Login">Log in</button>
-                        
+                        <label>To demo the site username:"demo" password:"demo"</label>                        
 
                         <br>
                         <br>
