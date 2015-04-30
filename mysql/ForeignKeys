@@ -1,7 +1,8 @@
 ALTER TABLE `Schedules` ADD CONSTRAINT `FK_DriverID` FOREIGN KEY (`Driver_ID`) REFERENCES `Users`(`ID`)
-ALTER TABLE `Admins` ADD CONSTRAINT `FK_AdminID` FOREIGN KEY (`Driver_ID`) REFERENCES `Users`(`ID`)
+ALTER TABLE `DriverTimes` ADD CONSTRAINT `FK_UniID` FOREIGN KEY (`UniveristyID`) REFERENCES `Users`(`UniversityID`)
+ALTER TABLE `StudentTimes` ADD CONSTRAINT `FK_StuID` FOREIGN KEY (`UniversityID`) REFERENCES `USERS`(`UniversityID`)
 
 
 
 
-//////still working on them
+
