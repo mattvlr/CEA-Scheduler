@@ -4,5 +4,8 @@ BEGIN
 IF CHAR_LENGTH(new.UniversityID) <  9 
 THEN 
 SET new.UniversityID = 000000000;
+ELSEIF CHAR_LENGTH(new.UniversityID) > 9
+THEN
+SET new.UniversityID = 000000000;
 END IF; 
 END;
