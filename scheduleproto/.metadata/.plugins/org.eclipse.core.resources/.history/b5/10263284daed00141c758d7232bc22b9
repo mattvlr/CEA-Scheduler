@@ -75,7 +75,7 @@ public class Main {
 			sorter.sort();
 			
 			//checker data
-			String lastTime = "-1";
+			String lastTime = "";
 			String lastPrimary = "";
 			String lastSecondary = "";
 			
@@ -92,7 +92,7 @@ public class Main {
 	        	String query = " insert into Schedules (Driver_ID, Day, Cart, Student_First, StudentLast, Driver, PickupTime, DropTime, PickupPoint, DropPoint, BackupDriver)"
 	        		+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	   
-	        	// create the mysql insert prepared statement
+	        	// create the mysql insert preparedstatement
 	        	PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 	        	preparedStmt.setInt 	(1, 1);
 	        	preparedStmt.setDate   	(2, startDate);
@@ -107,7 +107,7 @@ public class Main {
 	        	preparedStmt.setString  (11, secondaryDriver);
 	        
 	        	// execute the prepared statement
-	        	preparedStmt.execute();	         
+	        	//preparedStmt.execute();	         
 	        	
 	        	//check
 	        	lastTime = pickupTime;

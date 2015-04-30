@@ -75,7 +75,7 @@ public class Main {
 			sorter.sort();
 			
 			//checker data
-			String lastTime = "-1";
+			String lastTime = "";
 			String lastPrimary = "";
 			String lastSecondary = "";
 			
@@ -85,14 +85,14 @@ public class Main {
 		   		Calendar calendar = Calendar.getInstance();
 	        	java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
 	        	String pickupTime = sT.getRideTime(false);
-	        	String primaryDriver = (Integer.parseInt(lastTime) == Integer.parseInt(pickupTime)) ? lastPrimary : selectDriver(drivers, sT.getRideTime(), 2);
+	        	String primaryDriver = (lastTime == pickupTime) ? lastPrimary : selectDriver(drivers, sT.getRideTime(), 2);
 	        	String secondaryDriver = (selectDriver(drivers, sT.getRideTime(), 1) == primaryDriver) ? "No Backup" : (lastTime == pickupTime) ? lastSecondary : selectDriver(drivers, sT.getRideTime(), 1);
 	        	
 	        	// the mysql insert statement
 	        	String query = " insert into Schedules (Driver_ID, Day, Cart, Student_First, StudentLast, Driver, PickupTime, DropTime, PickupPoint, DropPoint, BackupDriver)"
 	        		+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	   
-	        	// create the mysql insert prepared statement
+	        	// create the mysql insert preparedstatement
 	        	PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 	        	preparedStmt.setInt 	(1, 1);
 	        	preparedStmt.setDate   	(2, startDate);
@@ -176,6 +176,7 @@ public class Main {
     	
     	else{
     		drivers.get(indexLeast).incrementTimesDriving(drivingWeight);
+    		System.out.println(drivers.get(indexLeast).getName());
     		return drivers.get(indexLeast).getName();
     	}
     }

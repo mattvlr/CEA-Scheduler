@@ -34,25 +34,6 @@ public class StudentTime {
 	public int getRideTime() {
 		return rideTime;
 	}
-	
-	public String getRideTime(boolean dropTime) {
-		String returnValue = "";
-		
-		if(dropTime){
-			returnValue = ""+(rideTime+15);
-			if(returnValue.length() == 3){
-				returnValue = "0" + returnValue;
-			}
-		}
-		else{
-			returnValue = ""+(rideTime);
-			if(returnValue.length() == 3){
-				returnValue = "0" + returnValue;
-			}
-		}
-		
-		return returnValue;
-	}
 
 	public void setRideTime(int rideTime) {
 		this.rideTime = rideTime;

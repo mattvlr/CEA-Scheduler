@@ -74,25 +74,19 @@ public class Main {
 			QuickSort sorter = new QuickSort(times);
 			sorter.sort();
 			
-			//checker data
-			String lastTime = "-1";
-			String lastPrimary = "";
-			String lastSecondary = "";
-			
 			//insert
 		   	for(StudentTime sT : times){
 		   		// create a sql date object so we can use it in our INSERT statement
 		   		Calendar calendar = Calendar.getInstance();
 	        	java.sql.Date startDate = new java.sql.Date(calendar.getTime().getTime());
-	        	String pickupTime = sT.getRideTime(false);
-	        	String primaryDriver = (Integer.parseInt(lastTime) == Integer.parseInt(pickupTime)) ? lastPrimary : selectDriver(drivers, sT.getRideTime(), 2);
-	        	String secondaryDriver = (selectDriver(drivers, sT.getRideTime(), 1) == primaryDriver) ? "No Backup" : (lastTime == pickupTime) ? lastSecondary : selectDriver(drivers, sT.getRideTime(), 1);
+	        	String primaryDriver = selectDriver(drivers, sT.getRideTime(), 2);
+	        	String secondaryDriver = (selectDriver(drivers, sT.getRideTime(), 1) == primaryDriver) ? "No Backup" : selectDriver(drivers, sT.getRideTime(), 1);
 	        	
 	        	// the mysql insert statement
 	        	String query = " insert into Schedules (Driver_ID, Day, Cart, Student_First, StudentLast, Driver, PickupTime, DropTime, PickupPoint, DropPoint, BackupDriver)"
 	        		+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	   
-	        	// create the mysql insert prepared statement
+	        	// create the mysql insert preparedstatement
 	        	PreparedStatement preparedStmt = (PreparedStatement) conn.prepareStatement(query);
 	        	preparedStmt.setInt 	(1, 1);
 	        	preparedStmt.setDate   	(2, startDate);
@@ -106,13 +100,9 @@ public class Main {
 	        	preparedStmt.setString  (10, sT.getDropPlace());
 	        	preparedStmt.setString  (11, secondaryDriver);
 	        
-	        	// execute the prepared statement
-	        	preparedStmt.execute();	         
-	        	
-	        	//check
-	        	lastTime = pickupTime;
-	        	lastPrimary = primaryDriver;
-	        	lastSecondary = secondaryDriver;
+	        	// execute the preparedstatement
+	        	//preparedStmt.execute();
+	         
 		   	}
 			//end db shit
 			conn.close(); 
@@ -163,7 +153,6 @@ public class Main {
     		if(dT.getStartTime() < studentPickupTime && studentPickupTime < dT.getEndTime()){
     			if(dT.getTimesDriving() < leastTimes){
     				indexLeast = counter;
-    				leastTimes = dT.getTimesDriving();
     			}
     		}
     		
@@ -176,6 +165,7 @@ public class Main {
     	
     	else{
     		drivers.get(indexLeast).incrementTimesDriving(drivingWeight);
+    		System.out.println(drivers.get(indexLeast).getName());
     		return drivers.get(indexLeast).getName();
     	}
     }
