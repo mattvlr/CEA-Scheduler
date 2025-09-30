@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+session_start();
 /*   TODO
 *---------------------
 * fix login in _mysql
@@ -8,8 +9,12 @@
 *
 *
 */
-require_once('mysql/_db.php');
-require_once('mysql/_mysql.php');
+require_once __DIR__ . '/mysql/_db.php';
+require_once __DIR__ . '/mysql/_mysql.php';
+
+if (!isset($_SESSION['PERMISSION'])) {
+  $_SESSION['PERMISSION'] = '0';
+}
 
 $loginStatus = '';
 $remember = ''; //if user/pass should be remembered
