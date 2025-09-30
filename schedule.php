@@ -1,48 +1,32 @@
 <?php
-$dbhost = "104.131.179.153";
-$dbname = "Scheduler";
-$dbuser = "web";
-$dbpass = "cea";
+require_once __DIR__ . '/lib/DataRepository.php';
 
-//	Connection
-global $db;
-$day = date('Y-m-d');
-//echo($day);
+$repository = new DataRepository();
+$day = isset($_GET['day']) ? $_GET['day'] : date('Y-m-d');
+$schedule = $repository->getScheduleForDay($day);
 
-$db = new mysqli();
-$db->connect($dbhost, $dbuser, $dbpass, $dbname);
-$db->set_charset("utf8");
+echo '<div class="panel panel-primary" style="width:90%;margin-right:4%">';
+echo '<div class="panel-heading"><h3 class="panel-title">Schedule ' . htmlspecialchars($day, ENT_QUOTES, 'UTF-8') . '</h3></div>';
+echo '<table class="table table-striped"><thead><tr><th>Golf Cart</th><th>Student Name</th><th>Driver</th><th>Pickup Time</th><th>Pickup Point</th><th>Dropoff Time</th><th>Dropoff Point</th><th>Backup Driver</th></tr></thead><tbody>';
 
-//	Check Connection
-//if ($db->connect_errno) {
- //   printf("Connect failed: %s\n", $db->connect_error);
-  //  exit();
-//}
-$query = 'SELECT * FROM Schedules WHERE DAY = "'. $day . '" ORDER BY PickupTime ASC;';
-echo'<div class="panel panel-primary" style="width=90%;margin-right:4%">
+if (!$schedule) {
+    echo '<tr><td colspan="8" class="text-center text-muted">No rides scheduled for this day.</td></tr>';
+} else {
+    foreach ($schedule as $row) {
+        $driverClass = (strcasecmp($row['Driver'], 'No Driver') === 0) ? ' class="danger"' : '';
+        $backupClass = (strcasecmp($row['BackupDriver'], 'No Backup') === 0) ? ' class="danger"' : '';
 
-  <div class="panel-heading"><h3 class="panel-title">Schedule '.$day.'</h3></div>
-  <table class="table table-striped"><thread><tr><th>Golf Cart</th><th>Student Name</th><th>Driver</th><th>Pickup Time<th>Pickup Point</th><th>Dropoff Time</th><th>Dropoff Point</th><th>Backup Driver</th></tr></thread>';
-	// Do Search
-	$result = $db->query($query);
-	while($results = $result->fetch_array()) {
-		$result_array[] = $results;
-	}
+        echo '<tr>';
+        echo '<td>' . htmlspecialchars($row['Cart'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($row['Student_First'] . ' ' . $row['StudentLast'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td' . $driverClass . '>' . htmlspecialchars($row['Driver'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($row['PickupTime'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($row['PickupPoint'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($row['DropTime'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($row['DropPoint'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td' . $backupClass . '>' . htmlspecialchars($row['BackupDriver'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '</tr>';
+    }
+}
 
-	// Check If We Have Results
-	if (isset($result_array)) {
-		foreach ($result_array as $result) {
-				if($result['Driver'] == "No Driver"){
-					$warn = 'class="danger"';
-				}
-				if($result['BackupDriver'] == "No Backup" ){
-					$bdwarn = 'class="danger"';
-				}
-				echo '<tr><td>'.$result['Cart'].'</td><td>'.$result['Student_First']. ' ' . $result['StudentLast'].'</td><td '.$warn.'>'.$result['Driver'].'</td><td>'.$result['PickupTime'].'</td><td>'.$result['PickupPoint'].'</td><td>'.$result['DropTime'].'</td><td>'.$result['DropPoint'].'</td><td ' .$bdwarn.'>'.$result['BackupDriver'].'</td></tr>';
-
-			
-		}
-	}
-	echo '</table></div>'; 
-	
-?>
+echo '</tbody></table></div>';

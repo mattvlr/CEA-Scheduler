@@ -1,34 +1,26 @@
 <?php
-	require_once('mysql/_mysql.php');
-$mysql = new mysql_driver;
-$mysql->connect();              
+require_once __DIR__ . '/mysql/_mysql.php';
 
-$msg = 'fail';
+$mysql = new mysql_driver();
+$mysql->connect();
 
-$perm = $mysql->select('Users','PERMISSION','ACTIVATION="'.$_GET['code'].'"');			//Get Permission level from database
+$code = isset($_GET['code']) ? $_GET['code'] : '';
+$message = 'Invalid activation, please double check your link.';
 
-if($perm > '0')																			//Higher than unactivated permission
-{
-	$msg = 'Your account is already activated<br>
-		Login <a href="loginform.php">here</a>!';
-}
-else if($perm == '0')																	//0 - user hasnt been activated then
-{
-	if($mysql->update('Users',"PERMISSION='1'",'ACTIVATION="'.$_GET['code'].'"'))		// Activate user
-	{ 
-		$msg = 'Your account is now activated<br>
-			Login <a href="loginform.php">here</a>!';
-	}
-	else
-	{
-		$msg = 'Failed';
-	}
-}
-else
-{
-	$msg = 'invalid activation, Please re-send your validation link';
+if ($code !== '') {
+    $perm = $mysql->select('Users', 'PERMISSION', 'ACTIVATION="' . $code . '"');
+
+    if ($perm === false) {
+        $message = 'We could not find an account for that activation code.';
+    } elseif ((string)$perm === '0') {
+        if ($mysql->update('Users', "PERMISSION='1'", 'ACTIVATION="' . $code . '"')) {
+            $message = 'Your account is now activated.<br>Login <a href="loginform.php">here</a>!';
+        } else {
+            $message = 'Activation failed. Please try again.';
+        }
+    } else {
+        $message = 'Your account is already activated.<br>Login <a href="loginform.php">here</a>!';
+    }
 }
 
-
-?>
-	<?php echo $msg; ?>
+echo '<div class="alert alert-info" style="margin:1em">' . $message . '</div>';

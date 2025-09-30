@@ -1,6 +1,6 @@
 <?php
-require_once('mysql/_db.php');
-require_once('mysql/_mysql.php');
+require_once __DIR__ . '/mysql/_db.php';
+require_once __DIR__ . '/mysql/_mysql.php';
 session_start();
 
 

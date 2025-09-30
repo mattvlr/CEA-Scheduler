@@ -1,52 +1,58 @@
-
 <?php
-$dbhost = "104.131.179.153";
-$dbname = "Scheduler";
-$dbuser = "web";
-$dbpass = "cea";
+require_once __DIR__ . '/lib/DataRepository.php';
 
-//	Connection
-global $db;
+$repository = new DataRepository();
+$users = $repository->listUsers();
 
-$db = new mysqli();
-$db->connect($dbhost, $dbuser, $dbpass, $dbname);
-$db->set_charset("utf8");
+echo '<div class="panel panel-primary" style="width:90%;margin-right:4%">';
+echo '<div class="panel-heading"><h3 class="panel-title">User List</h3></div>';
+echo '<table class="table"><thead><tr><th>ID</th><th>Last Name</th><th>First Name</th><th>University ID</th><th>Username</th><th>Permission</th></tr></thead><tbody>';
 
-//	Check Connection
-if ($db->connect_errno) {
-    printf("Connect failed: %s\n", $db->connect_error);
-    exit();
+if (!$users) {
+    echo '<tr><td colspan="6" class="text-center text-muted">No users available.</td></tr>';
+} else {
+    foreach ($users as $user) {
+        $permissionClass = '';
+        $permissionLabel = 'Guest';
+
+        switch ((string)$user['PERMISSION']) {
+            case '3':
+                $permissionClass = ' class="danger"';
+                $permissionLabel = 'Admin';
+                break;
+            case '2':
+                $permissionClass = ' class="info"';
+                $permissionLabel = 'Driver';
+                break;
+            case '1':
+                $permissionClass = ' class="success"';
+                $permissionLabel = 'Student';
+                break;
+            case '0':
+                $permissionClass = '';
+                $permissionLabel = 'Guest';
+                break;
+            default:
+                $permissionClass = ' class="warning"';
+                $permissionLabel = 'Inactive';
+                break;
+        }
+
+        $username = htmlspecialchars($user['USERNAME'], ENT_QUOTES, 'UTF-8');
+        $link = '?act=profile&u=' . $username;
+
+        echo '<tr' . $permissionClass . ' data-href="' . $link . '">';
+        echo '<td>' . htmlspecialchars($user['ID'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($user['LAST_NAME'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($user['FIRST_NAME'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . htmlspecialchars($user['UniversityID'], ENT_QUOTES, 'UTF-8') . '</td>';
+        echo '<td>' . $username . '</td>';
+        echo '<td>' . $permissionLabel . '</td>';
+        echo '</tr>';
+    }
 }
-$query = "SELECT * FROM Users ORDER BY LAST_NAME ASC;";
-echo'<div class="panel panel-primary" style="width=90%;margin-right:4%">
 
-  <div class="panel-heading"><h3 class="panel-title">User List</h3></div>
-  <table class="table"><thread><tr><th>ID</th><th>Last Name</th><th>First Name</th><th>University ID<th>Username</th><th>Permission</th></tr></thread>';
-	// Do Search
-	$result = $db->query($query);
-	while($results = $result->fetch_array()) {
-		$result_array[] = $results;
-	}
-
-	// Check If We Have Results
-	if (isset($result_array)) {
-		foreach ($result_array as $result) {
-			if($result['PERMISSION'] == 3){
-				echo '<tr class="danger"  data-href="?act=profile&u='.$result["USERNAME"].'"><td>'.$result['ID'].'</td><td>'.$result['LAST_NAME'].'</td><td>'.$result['FIRST_NAME'].'</td><td>'.$result['UniversityID'].'</td><td>'.$result['USERNAME'].'</td><td>Admin</td></tr></a>';
-			} elseif($result['PERMISSION'] == 2){
-				echo '<tr class="info"  data-href="?act=profile&u='.$result["USERNAME"].'"><td>'.$result['ID'].'</td><td>'.$result['LAST_NAME'].'</td><td>'.$result['FIRST_NAME'].'</td><td>'.$result['UniversityID'].'</td><td>'.$result['USERNAME'].'</td><td>Driver</td></tr>';
-			} elseif($result['PERMISSION'] == 1){
-				echo '<tr class="success"  data-href="?act=profile&u='.$result["USERNAME"].'"><td>'.$result['ID'].'</td><td>'.$result['LAST_NAME'].'</td><td>'.$result['FIRST_NAME'].'</td><td>'.$result['UniversityID'].'</td><td>'.$result['USERNAME'].'</td><td>Student</td></tr>';
-			} elseif($result['PERMISSION'] == 0){
-				echo '<tr  data-href="?act=profile&u='.$result["USERNAME"].'"><td>'.$result['ID'].'</td><td>'.$result['LAST_NAME'].'</td><td>'.$result['FIRST_NAME'].'</td><td>'.$result['UniversityID'].'</td><td>'.$result['USERNAME'].'</td><td>Guest</td></tr>';
-			} else{
-				echo '<tr class="warning"  data-href="?act=profile&u='.$result["USERNAME"].'"><td>'.$result['ID'].'</td><td>'.$result['LAST_NAME'].'</td><td>'.$result['FIRST_NAME'].'</td><td>'.$result['UniversityID'].'</td><td>'.$result['USERNAME'].'</td><td>Inactive</td></tr>';
-			}
-			
-		}
-	}
-	echo '</table></div>';
-	
+echo '</tbody></table></div>';
 ?>
 <script>
 $('tr[data-href]').on("click", function() {

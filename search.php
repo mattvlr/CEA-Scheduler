@@ -1,91 +1,55 @@
 <?php
-/************************************************
-	The Search PHP File
-************************************************/
+require_once __DIR__ . '/lib/DataRepository.php';
 
+$repository = new DataRepository();
+$query = isset($_POST['query']) ? trim($_POST['query']) : '';
 
-/************************************************
-	MySQL Connect
-************************************************/
-
-// Credentials
-$dbhost = "104.131.179.153";
-$dbname = "Scheduler";
-$dbuser = "web";
-$dbpass = "cea";
-
-//	Connection
-global $db;
-
-$db = new mysqli();
-$db->connect($dbhost, $dbuser, $dbpass, $dbname);
-$db->set_charset("utf8");
-
-//	Check Connection
-if ($db->connect_errno) {
-    printf("Connect failed: %s\n", $db->connect_error);
-    exit();
-}
-/************************************************
-	Search Functionality
-************************************************/
-
-// Define Output HTML Formating
-$html = '';
-$html .= '<li class="result">';
-$html .= '<h4>nameString</h4>';
-$html .= '<h4>functionString</h4>';
-$html .= '</li>';
-
-// Get Search
-$search_string = preg_replace("/[^A-Za-z0-9]/", " ", $_POST['query']);
-$search_string = $db->real_escape_string($search_string);
-
-// Check Length More Than One Character
-if (strlen($search_string) >= 1 && $search_string !== ' ') {
-	// Build Query
-	$query = 'SELECT * FROM Users WHERE FIRST_NAME LIKE "%'.$search_string.'%" OR LAST_NAME LIKE "%'.$search_string.'%" ORDER BY LAST_NAME ASC;';
-
-	// Do Search
-	$result = $db->query($query);
-	while($results = $result->fetch_array()) {
-		$result_array[] = $results;
-	}
-
-	// Check If We Have Results
-	if (isset($result_array)) {
-		foreach ($result_array as $result) {
-
-			
-			$first_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['FIRST_NAME']);
-			$last_name = preg_replace("/".$search_string."/i", "<b class='highlight'>".$search_string."</b>", $result['LAST_NAME']);
-
-			
-			if($result['PERMISSION'] == 3){ //admin
-				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-danger"><h4>'.$first_name.' '.$last_name.'<span class="badge" style="float:right">Admin</span></h4></li></a>';
-			} elseif($result['PERMISSION'] == 2){ //driver
-				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-info"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Driver</span></h4></li></a>';
-			} elseif($result['PERMISSION'] == 1){ //student
-				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-success"><h4>'.$first_name.' '.$last_name.'<span class="badge" style="float:right">Student</span></h4></li></a>';
-			} elseif($result['PERMISSION'] == 0){ //guest
-				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Guest</span></h4></li></a>';
-			} else{ //inactive / everyone else??
-				$output = '<a href="?act=profile&u='.$result['USERNAME'].'"<li class="list-group-item list-group-item-warning"><h4>'.$first_name.' '.$last_name.'<span class="badge"  style="float:right">Inactive</span></h4></li></a>';
-			}
-			// Output
-			echo($output);
-		}
-	}else{
-
-		// Format No Results Output
-		$output = str_replace('urlString', 'javascript:void(0);', $html);
-		$output = str_replace('nameString', '<b>No Results Found.</b>', $output);
-		$output = str_replace('functionString', 'Sorry :(', $output);
-
-		// Output
-		echo($output);
-	}
+if ($query === '') {
+    exit;
 }
 
+$results = $repository->searchUsers($query);
 
-?>
+if (!$results) {
+    echo '<li class="list-group-item"><h4><b>No results found.</b></h4><p class="text-muted">Try a different name or username.</p></li>';
+    exit;
+}
+
+$pattern = '/' . preg_quote($query, '/') . '/i';
+
+foreach ($results as $result) {
+    $first = htmlspecialchars($result['FIRST_NAME'], ENT_QUOTES, 'UTF-8');
+    $last = htmlspecialchars($result['LAST_NAME'], ENT_QUOTES, 'UTF-8');
+    $username = htmlspecialchars($result['USERNAME'], ENT_QUOTES, 'UTF-8');
+
+    $firstHighlighted = preg_replace($pattern, '<b class="highlight">$0</b>', $first);
+    $lastHighlighted = preg_replace($pattern, '<b class="highlight">$0</b>', $last);
+
+    $permissionLabel = 'Guest';
+    $itemClass = 'list-group-item';
+
+    switch ((string)$result['PERMISSION']) {
+        case '3':
+            $permissionLabel = 'Admin';
+            $itemClass .= ' list-group-item-danger';
+            break;
+        case '2':
+            $permissionLabel = 'Driver';
+            $itemClass .= ' list-group-item-info';
+            break;
+        case '1':
+            $permissionLabel = 'Student';
+            $itemClass .= ' list-group-item-success';
+            break;
+        default:
+            if ((string)$result['PERMISSION'] !== '0') {
+                $permissionLabel = 'Inactive';
+                $itemClass .= ' list-group-item-warning';
+            }
+            break;
+    }
+
+    echo '<a href="?act=profile&amp;u=' . $username . '"><li class="' . $itemClass . '"><h4>' .
+        $firstHighlighted . ' ' . $lastHighlighted . '<span class="badge" style="float:right">' .
+        htmlspecialchars($permissionLabel, ENT_QUOTES, 'UTF-8') . '</span></h4></li></a>';
+}
